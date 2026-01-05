@@ -1,0 +1,38 @@
+ {
+  "style_keywords": ["calm", "devotional", "airy", "soft", "gentle", "uplifting", "clean", "minimal"],
+  "style_axes": [
+  { "axis": "minimal ↔ expressive", "target": "minimal with a touch of warmth (70/30)" },
+  { "axis": "soft ↔ sharp", "target": "soft, rounded, no sharp edges" },
+  { "axis": "playful ↔ reverent", "target": "reverent but approachable (20/80)" },
+  { "axis": "flat ↔ dimensional", "target": "light dimensionality via gradients and subtle shadows" }
+  ],
+  "color_mood": {
+  "description": "Cool, pastel-leaning palette with pale blues, lavender, sage, and muted neutrals; gentle gradients
+  for depth.",
+  "avoid": ["high-contrast neon", "harsh black-and-white", "overly saturated primaries"]
+  },
+  "typography_mood": {
+  "description": "Clean, friendly sans-serif with soft geometry, medium weights, and generous spacing; clear, quiet
+  hierarchy.",
+  "dos": ["use rounded or humanist sans", "keep type sizes modest and readable", "add breathing room between lines
+  and sections"],
+  "donts": ["use sharp geometric or ultra-condensed fonts", "overuse bold weights", "stack many type styles"]
+  },
+  "imagery_rules": {
+  "photography_or_illustration": "Serene photography or soft, minimal illustration; imagery feels contemplative and
+  airy.",
+  "dos": ["use natural light and soft focus", "favor subtle silhouettes and gentle shapes", "keep imagery
+  uncluttered"],
+  "donts": ["use busy scenes", "use high-drama lighting", "use gritty or harsh textures"]
+  },
+  "layout_rules": {
+  "dos": ["use card-based modules with rounded corners", "layer translucent panels for depth", "maintain generous
+  margins and spacing"],
+  "donts": ["use dense grids with tight gutters", "add heavy borders or hard outlines", "overcrowd screens with
+  controls"]
+  },
+  "references_summary": ["Soft gradient UI cards", "Rounded buttons and icons", "Clouds/wreath motifs", "Pastel
+  devotional tiles", "Minimal photo covers with quiet type"],
+  "risks_or_watchouts": ["Over-softening can reduce contrast/readability", "Too many gradients can feel dated or
+  cliché", "Avoid slipping into generic meditation-app tropes"]
+  }
