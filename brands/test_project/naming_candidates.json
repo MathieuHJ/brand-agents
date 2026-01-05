@@ -1,0 +1,184 @@
+  {
+    "idea": "A minimalist tool that turns lectures into interactive polls and
+  quizzes.",
+    "assumptions": [
+      "English-friendly, global audience, 1-2 syllables preferred",
+      "No abbreviations unless they read as standalone words"
+    ],
+    "top_10": [
+      {
+        "name": "Numo",
+        "score_total": 22,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 5,
+          "distinctiveness": 4,
+          "semantic_fit": 4,
+          "visual_potential": 5
+        },
+        "rationale": "Short, precise, modern; subtle numeric/precision cue
+  without being literal.",
+        "risks": [
+          "Light math association"
+        ],
+        "recommended_domain_checks": [".com", ".io"]
+      },
+      {
+        "name": "Verveo",
+        "score_total": 21,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 4,
+          "distinctiveness": 4,
+          "semantic_fit": 4,
+          "visual_potential": 5
+        },
+        "rationale": "Confident and smooth; feels modern and smart without being
+  academic.",
+        "risks": [
+          "Three syllables"
+        ],
+        "recommended_domain_checks": [".com", ".edu"]
+      },
+      {
+        "name": "Quillix",
+        "score_total": 20,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 3,
+          "distinctiveness": 5,
+          "semantic_fit": 4,
+          "visual_potential": 4
+        },
+        "rationale": "Hints at lecture/writing with a modern tech edge;
+  distinctive.",
+        "risks": [
+          "Spelling might need reinforcement"
+        ],
+        "recommended_domain_checks": [".com", ".io"]
+      },
+      {
+        "name": "Pollis",
+        "score_total": 20,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 5,
+          "distinctiveness": 3,
+          "semantic_fit": 5,
+          "visual_potential": 3
+        },
+        "rationale": "Directly tied to polls without using the exact word; very
+  clear.",
+        "risks": [
+          "Close to 'polis' in some regions"
+        ],
+        "recommended_domain_checks": [".com", ".ai"]
+      },
+      {
+        "name": "Vetra",
+        "score_total": 20,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 5,
+          "distinctiveness": 4,
+          "semantic_fit": 3,
+          "visual_potential": 4
+        },
+        "rationale": "Crisp and modern; feels like a precise tool brand.",
+        "risks": [
+          "Abstract meaning"
+        ],
+        "recommended_domain_checks": [".com", ".io"]
+      },
+      {
+        "name": "Lumor",
+        "score_total": 19,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 4,
+          "distinctiveness": 4,
+          "semantic_fit": 3,
+          "visual_potential": 4
+        },
+        "rationale": "Calm and smart; subtle cue to signal/insight.",
+        "risks": [
+          "Meaning ambiguity"
+        ],
+        "recommended_domain_checks": [".com", ".app"]
+      },
+      {
+        "name": "Quietly",
+        "score_total": 18,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 5,
+          "distinctiveness": 3,
+          "semantic_fit": 3,
+          "visual_potential": 3
+        },
+        "rationale": "Matches calm, minimalist vibe; distinct in category.",
+        "risks": [
+          "Longer, common word"
+        ],
+        "recommended_domain_checks": [".com", ".co"]
+      },
+      {
+        "name": "Swayze",
+        "score_total": 18,
+        "scores": {
+          "memorability": 4,
+          "pronounceability": 4,
+          "distinctiveness": 4,
+          "semantic_fit": 3,
+          "visual_potential": 3
+        },
+        "rationale": "Suggests audience movement/participation; memorable
+  sound.",
+        "risks": [
+          "Surname association"
+        ],
+        "recommended_domain_checks": [".com", ".io"]
+      },
+      {
+        "name": "Tallyn",
+        "score_total": 18,
+        "scores": {
+          "memorability": 3,
+          "pronounceability": 5,
+          "distinctiveness": 3,
+          "semantic_fit": 4,
+          "visual_potential": 3
+        },
+        "rationale": "Precise, modern; subtle counting signal without being
+  cliché.",
+        "risks": [
+          "Spelling variants like Talin/Talin"
+        ],
+        "recommended_domain_checks": [".com", ".ai"]
+      },
+      {
+        "name": "Pivio",
+        "score_total": 17,
+        "scores": {
+          "memorability": 3,
+          "pronounceability": 4,
+          "distinctiveness": 4,
+          "semantic_fit": 3,
+          "visual_potential": 3
+        },
+        "rationale": "Short and clean; implies interaction pivot.",
+        "risks": [
+          "Abstract meaning"
+        ],
+        "recommended_domain_checks": [".com", ".io"]
+      }
+    ],
+    "safe_5": ["Pollis", "Tallyn", "Vetra", "Numo", "Pivio"],
+    "wildcard_5": ["Quillix", "Swayze", "Lumor", "Verveo", "Quietly"],
+    "next_steps": [
+      "Pick 3 finalists and run quick trademark and domain checks (.com + .io
+  or .edu).",
+      "Say which direction you prefer (abstract vs. semi-descriptive) and I can
+  refine."
+    ]
+  }
