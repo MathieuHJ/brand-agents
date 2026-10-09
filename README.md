@@ -1,6 +1,6 @@
 # Brand Agents
 
-Agent skills for the early, fuzzy part of brand work: turning references into art direction, finding a name, and exploring identity directions. Each skill returns a readable summary plus JSON that matches a published schema, so outputs can be checked, compared and passed to the next step.
+Agent skills for brand work, from the first fuzzy brief to the asset that ships: writing the brief, turning references into art direction, finding a name, exploring identity directions, keeping claims honest and reviewing the result. Each skill returns a readable summary plus JSON that matches a published schema, so outputs can be checked, compared and passed to the next step.
 
 The skills are plain Markdown in the [Agent Skills](https://agentskills.io) format. They work in Claude Code, Codex and any assistant you can paste instructions into. There is no service to run.
 
@@ -8,13 +8,14 @@ The skills are plain Markdown in the [Agent Skills](https://agentskills.io) form
 
 | Skill | Bring | Get back |
 | --- | --- | --- |
+| [Brand brief intake](skills/brand-brief-intake/SKILL.md) | Whatever you have: notes, a deck, a website, or nothing | A structured brief with a persona test, unknowns left blank with an owner, and which skill can run next |
 | [Art direction extractor](skills/art-direction-extractor/SKILL.md) | Mood-board images; optionally audience, adjectives, competitors, things to avoid | Evidence-backed rules for colour, type, imagery, layout and motion, an accessibility pass, and hand-offs for logo, UI and content |
 | [Brand naming rubric](skills/brand-naming-rubric/SKILL.md) | The idea, audience, tone, markets and constraints | A check on whether it needs a name at all, ranked names with pronunciation and linguistic notes, a kill screen, and a clearance to-do list |
 | [Logo and identity directions](skills/logo-identity-directions/SKILL.md) | A chosen name, ideally with an art direction JSON | 3–5 distinct directions with lockup, 16px and motion behaviour, clichés to avoid, and a comparable scorecard |
-| [Asset QA scorecard](skills/asset-qa-scorecard/SKILL.md) | A finished asset, where it runs, and the brand rules | A weighted 100-point review with hard failures, evidence and fixes; a script computes the total and the pass, revise or reject verdict |
 | [Claims register](skills/claims-register/SKILL.md) | Product facts and their release state; later, the copy to check | A register of what you may claim (Shipped, Beta, Planned, Proposed, Retired), and a script that flags copy running ahead of the product |
+| [Asset QA scorecard](skills/asset-qa-scorecard/SKILL.md) | A finished asset, where it runs, and the brand rules | A weighted 100-point review with hard failures, evidence and fixes; a script computes the total and the pass, revise or reject verdict |
 
-They chain: **references → art direction → name → identity directions**, with the claims register keeping launch copy honest and the QA scorecard reviewing what ships. Each can also run alone.
+They chain: **brief → art direction → name → identity directions → claims → QA**. The brief says which skill is ready to run next. Each can also run alone.
 
 ## Install
 
@@ -32,6 +33,8 @@ They chain: **references → art direction → name → identity directions**, w
 ## Use
 
 Ask naturally; the skill descriptions tell the agent when to load them.
+
+> Here are my notes and our pitch deck for a daily devotional app. Turn them into a brief and tell me what's missing.
 
 > Name a tool that turns lectures into live polls and quizzes. It's for educators, English first, and it should feel clear and warm. Avoid anything that sounds like Kahoot or Mentimeter.
 
@@ -80,7 +83,7 @@ Any hard failure rejects the asset; a total under the threshold, or any dimensio
 
 ## Examples
 
-[`brands/test_project/`](brands/test_project/) holds one output per skill: [art direction](brands/test_project/art_direction.json), [naming](brands/test_project/naming_candidates.json), [identity directions](brands/test_project/logo_directions.json) and a [claims register](brands/test_project/claims_register.json) with [launch copy](brands/test_project/launch_copy.md) that fails it and a [revision](brands/test_project/launch_copy_revised.md) that passes, and a [QA scorecard](brands/test_project/qa_scorecard.json). Naming and claims share one fictional product; art direction, identity directions and the scorecard share another. Names are illustrative and have not been cleared.
+[`brands/test_project/`](brands/test_project/) holds an output from every skill for two fictional products: Aurel, a devotional app taken from brief to QA, and Numo, a lecture-quiz tool used for naming and claims. Its [index](brands/test_project/README.md) shows which file is which. Names are illustrative and have not been cleared.
 
 ## Validate
 
@@ -96,7 +99,7 @@ This checks every skill's frontmatter and every example against its skill's `sch
 node scripts/validate-examples.mjs path/to/naming_candidates.json
 ```
 
-The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`, `qa_scorecard.json`).
+The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`, `qa_scorecard.json`, `brief.json`).
 
 ## How the skills think
 
