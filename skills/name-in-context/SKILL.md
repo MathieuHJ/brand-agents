@@ -1,6 +1,6 @@
 ---
 name: name-in-context
-description: Put shortlisted names where people will actually meet them (wordmark, app icon at 60, 29 and 16px, browser tab and address bar, social handle, everyday sentences) on a single offline HTML page, with a button that speaks each name and flags for shared monograms, awkward possessives, long names and letters that blur at small sizes. Use after a naming shortlist exists, or when someone asks to compare, preview, mock up or sanity-check names.
+description: Put shortlisted names where people will actually meet them (wordmark, app icon at 60, 29 and 16px, browser tab and address bar, social handle, everyday sentences) on a single offline HTML page, with a button that speaks each name and flags for shared monograms, awkward possessives, long names and letters that blur at small sizes. Use when a naming shortlist needs comparing, or when someone asks to preview, mock up or sanity-check names.
 metadata:
   version: 0.1.0
 ---
