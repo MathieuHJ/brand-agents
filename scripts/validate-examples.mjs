@@ -4,6 +4,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { basename, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { score } from '../skills/asset-qa-scorecard/scripts/score.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const skillsDir = join(root, 'skills');
@@ -15,6 +16,7 @@ const OUTPUTS = {
   'naming_candidates.json': 'brand-naming-rubric',
   'logo_directions.json': 'logo-identity-directions',
   'claims_register.json': 'claims-register',
+  'qa_scorecard.json': 'asset-qa-scorecard',
 };
 
 const errors = [];
@@ -102,6 +104,15 @@ const RULES = {
     if (new Set(ids).size !== ids.length) fail(where, 'claim ids must be unique');
     for (const c of data.claims)
       if (c.status !== 'planned' && c.surfaces?.length) fail(where, `${c.id} lists surfaces, which only apply to planned claims`);
+  },
+  'asset-qa-scorecard'(data, where) {
+    const { card, problems } = score(data);
+    for (const p of problems) fail(where, p);
+    if (card.total !== data.total) fail(where, `total ${data.total} should be ${card.total} (run scripts/score.mjs --write)`);
+    if (card.verdict !== data.verdict) fail(where, `verdict "${data.verdict}" should be "${card.verdict}"`);
+    card.dimensions.forEach((d, i) => {
+      if (d.below_floor !== data.dimensions[i].below_floor) fail(where, `${d.id} below_floor should be ${d.below_floor}`);
+    });
   },
   'logo-identity-directions'(data, where) {
     const names = data.directions.map((d) => d.direction_name);

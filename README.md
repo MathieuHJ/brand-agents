@@ -11,9 +11,10 @@ The skills are plain Markdown in the [Agent Skills](https://agentskills.io) form
 | [Art direction extractor](skills/art-direction-extractor/SKILL.md) | Mood-board images; optionally audience, adjectives, competitors, things to avoid | Evidence-backed rules for colour, type, imagery, layout and motion, an accessibility pass, and hand-offs for logo, UI and content |
 | [Brand naming rubric](skills/brand-naming-rubric/SKILL.md) | The idea, audience, tone, markets and constraints | A check on whether it needs a name at all, ranked names with pronunciation and linguistic notes, a kill screen, and a clearance to-do list |
 | [Logo and identity directions](skills/logo-identity-directions/SKILL.md) | A chosen name, ideally with an art direction JSON | 3–5 distinct directions with lockup, 16px and motion behaviour, clichés to avoid, and a comparable scorecard |
+| [Asset QA scorecard](skills/asset-qa-scorecard/SKILL.md) | A finished asset, where it runs, and the brand rules | A weighted 100-point review with hard failures, evidence and fixes; a script computes the total and the pass, revise or reject verdict |
 | [Claims register](skills/claims-register/SKILL.md) | Product facts and their release state; later, the copy to check | A register of what you may claim (Shipped, Beta, Planned, Proposed, Retired), and a script that flags copy running ahead of the product |
 
-They chain: **references → art direction → name → identity directions**, with the claims register keeping launch copy honest. Each can also run alone.
+They chain: **references → art direction → name → identity directions**, with the claims register keeping launch copy honest and the QA scorecard reviewing what ships. Each can also run alone.
 
 ## Install
 
@@ -60,9 +61,26 @@ P1  line 7 C3  Results sync straight to Canvas and Moodle.
 
 It exits with code 1 on any P0, so it can run in CI. It matches words, so treat it as a screen, not a verdict.
 
+## Score an asset
+
+The QA scorecard's script does the arithmetic, so the verdict always follows from the numbers:
+
+```sh
+node skills/asset-qa-scorecard/scripts/score.mjs brands/test_project/qa_scorecard.json
+```
+
+```text
+Legibility and accessibility  ██████····     6/10  below floor
+Crops and formats             ██████····     3/5  below floor
+
+REVISE  84/100 (threshold 85)
+```
+
+Any hard failure rejects the asset; a total under the threshold, or any dimension under 70% of its weight, means revise.
+
 ## Examples
 
-[`brands/test_project/`](brands/test_project/) holds one output per skill: [art direction](brands/test_project/art_direction.json), [naming](brands/test_project/naming_candidates.json), [identity directions](brands/test_project/logo_directions.json) and a [claims register](brands/test_project/claims_register.json) with [launch copy](brands/test_project/launch_copy.md) that fails it and a [revision](brands/test_project/launch_copy_revised.md) that passes. Naming and claims share one fictional product; art direction and identity directions share another. Names are illustrative and have not been cleared.
+[`brands/test_project/`](brands/test_project/) holds one output per skill: [art direction](brands/test_project/art_direction.json), [naming](brands/test_project/naming_candidates.json), [identity directions](brands/test_project/logo_directions.json) and a [claims register](brands/test_project/claims_register.json) with [launch copy](brands/test_project/launch_copy.md) that fails it and a [revision](brands/test_project/launch_copy_revised.md) that passes, and a [QA scorecard](brands/test_project/qa_scorecard.json). Naming and claims share one fictional product; art direction, identity directions and the scorecard share another. Names are illustrative and have not been cleared.
 
 ## Validate
 
@@ -78,7 +96,7 @@ This checks every skill's frontmatter and every example against its skill's `sch
 node scripts/validate-examples.mjs path/to/naming_candidates.json
 ```
 
-The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`).
+The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`, `qa_scorecard.json`).
 
 ## How the skills think
 

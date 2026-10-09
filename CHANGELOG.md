@@ -4,7 +4,8 @@
 
 ### Added
 - **Claims register** skill: tag every product claim Shipped, Beta, Planned, Proposed or Retired with a source, then screen copy with `scripts/check-copy.mjs` (unreleased features in the present tense, unqualified beta claims, universal promises, banned phrases, unsourced numbers). Example register and launch copy in `brands/test_project/`.
-- The validator accepts nullable fields and checks claims registers.
+- **Asset QA scorecard** skill: a weighted 100-point rubric with seven hard failures, a threshold and a 70% per-dimension floor. `scripts/score.mjs` computes the total and verdict. Example scorecard in `brands/test_project/`.
+- The validator accepts nullable fields and checks claims registers and scorecard arithmetic.
 
 ## 0.2.0 — 2026-10-09
 

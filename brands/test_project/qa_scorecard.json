@@ -1,0 +1,139 @@
+{
+  "asset": {
+    "name": "Aurel app store screenshot 1 (\"Five quiet minutes\")",
+    "channel": "App store listing",
+    "format": "1290×2796 portrait",
+    "smallest_view": "search results thumbnail, about 120px wide"
+  },
+  "reviewer": {
+    "name": "Design lead",
+    "independent": true
+  },
+  "threshold": 85,
+  "floor_ratio": 0.7,
+  "dimensions": [
+    {
+      "id": "message",
+      "label": "Message clarity",
+      "weight": 20,
+      "score": 18,
+      "evidence": "Headline \"Five quiet minutes\" reads first and matches the brief's promise.",
+      "fix": "Cut the second line; it repeats the headline.",
+      "below_floor": false
+    },
+    {
+      "id": "brand_fit",
+      "label": "Brand fit",
+      "weight": 18,
+      "score": 16,
+      "evidence": "Rounded cards, pastel ground and open-halo icon follow the art direction.",
+      "fix": "The gradient is stronger than the one-gradient-per-screen rule allows; flatten the top half.",
+      "below_floor": false
+    },
+    {
+      "id": "distinctiveness",
+      "label": "Distinctiveness",
+      "weight": 15,
+      "score": 11,
+      "evidence": "Phone-in-hand on a gradient is the category default.",
+      "fix": "Lead with the reading screen full-bleed instead of a device frame.",
+      "below_floor": false
+    },
+    {
+      "id": "truth",
+      "label": "Product truth",
+      "weight": 15,
+      "score": 15,
+      "evidence": "Screen is a capture of the current build; no unreleased features shown.",
+      "fix": null,
+      "below_floor": false
+    },
+    {
+      "id": "composition",
+      "label": "Hierarchy and composition",
+      "weight": 12,
+      "score": 10,
+      "evidence": "Eye goes headline, then screen, then the small caption.",
+      "fix": "Give the headline more space above the device.",
+      "below_floor": false
+    },
+    {
+      "id": "accessibility",
+      "label": "Legibility and accessibility",
+      "weight": 10,
+      "score": 6,
+      "evidence": "Caption is lavender on pale blue, about 2.1:1, and vanishes at thumbnail size.",
+      "fix": "Set the caption in the text colour, or remove it.",
+      "below_floor": true
+    },
+    {
+      "id": "craft",
+      "label": "Craft",
+      "weight": 5,
+      "score": 5,
+      "evidence": "Clean edges, consistent radius, sharp capture.",
+      "fix": null,
+      "below_floor": false
+    },
+    {
+      "id": "resilience",
+      "label": "Crops and formats",
+      "weight": 5,
+      "score": 3,
+      "evidence": "Headline is close to the top edge; the 6.1-inch crop clips the descender.",
+      "fix": "Move the headline down 80px.",
+      "below_floor": true
+    }
+  ],
+  "hard_failures": [
+    {
+      "id": "HF1",
+      "rule": "Unsupported claim or wrong release state",
+      "triggered": false,
+      "evidence": "No product claims beyond the headline."
+    },
+    {
+      "id": "HF2",
+      "rule": "Invented UI, product, data or logo presented as real",
+      "triggered": false,
+      "evidence": "Real build capture."
+    },
+    {
+      "id": "HF3",
+      "rule": "Key text unreadable at the smallest size or below WCAG AA",
+      "triggered": false,
+      "evidence": "Headline passes; only the secondary caption fails, scored under accessibility."
+    },
+    {
+      "id": "HF4",
+      "rule": "Key information lost in a required crop",
+      "triggered": false,
+      "evidence": "Clipped descender only; headline still reads."
+    },
+    {
+      "id": "HF5",
+      "rule": "Retired or off-brand colours, type or logo versions",
+      "triggered": false,
+      "evidence": "Current icon and palette."
+    },
+    {
+      "id": "HF6",
+      "rule": "People shown as stereotypes, distorted, or without rights",
+      "triggered": false,
+      "evidence": "No people shown."
+    },
+    {
+      "id": "HF7",
+      "rule": "Polished but without a job",
+      "triggered": false,
+      "evidence": "First screenshot in the listing; sells the core promise."
+    }
+  ],
+  "total": 84,
+  "verdict": "revise",
+  "top_fixes": [
+    "Set the caption in the text colour or remove it (accessibility is below its floor).",
+    "Replace the device frame with a full-bleed reading screen to stand out from the category.",
+    "Move the headline down 80px so it survives the smaller crop."
+  ]
+}
