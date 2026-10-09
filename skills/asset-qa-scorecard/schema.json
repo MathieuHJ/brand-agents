@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Asset QA scorecard",
+  "type": "object",
+  "required": ["asset", "reviewer", "threshold", "floor_ratio", "dimensions", "hard_failures", "total", "verdict", "top_fixes"],
+  "additionalProperties": false,
+  "properties": {
+    "asset": {
+      "type": "object",
+      "required": ["name", "channel", "format", "smallest_view"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "channel": { "type": "string" },
+        "format": { "type": "string" },
+        "smallest_view": { "type": "string" }
+      }
+    },
+    "reviewer": {
+      "type": "object",
+      "required": ["name", "independent"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "independent": { "type": "boolean" }
+      }
+    },
+    "threshold": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "floor_ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+    "dimensions": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "weight", "score", "evidence", "below_floor"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z_]+$" },
+          "label": { "type": "string" },
+          "weight": { "type": "integer", "minimum": 1, "maximum": 100 },
+          "score": { "type": "number", "minimum": 0 },
+          "evidence": { "type": "string", "minLength": 1 },
+          "fix": { "type": ["string", "null"] },
+          "below_floor": { "type": "boolean" }
+        }
+      }
+    },
+    "hard_failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule", "triggered", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^HF[0-9]+$" },
+          "rule": { "type": "string" },
+          "triggered": { "type": "boolean" },
+          "evidence": { "type": "string" }
+        }
+      }
+    },
+    "total": { "type": "number", "minimum": 0, "maximum": 100 },
+    "verdict": { "type": "string", "enum": ["pass", "revise", "reject"] },
+    "top_fixes": { "type": "array", "maxItems": 3, "items": { "type": "string" } }
+  }
+}
