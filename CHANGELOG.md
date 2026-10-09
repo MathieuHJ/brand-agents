@@ -1,13 +1,18 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 — 2026-10-09
 
 ### Added
+- [Getting started](docs/getting-started.md) guide: install for Claude Code (plugin or repo), Codex, Claude.ai and other assistants, first run, standard filenames, scripts and exit codes, validation, troubleshooting.
+- [Workflow](docs/workflow.md) guide: a full project from brief to QA, step by step, with shorter paths for common jobs.
+- Release ZIPs: `scripts/package-skills.sh` builds one ZIP per skill (for Claude.ai uploads) and one with every skill; a release workflow attaches them to each GitHub release.
+- `.agents/skills` link for current Codex versions.
 - **Name in context** skill: `scripts/preview.mjs` turns a naming shortlist into an offline HTML page (wordmark in four type styles, app icon at 60/29/16px, browser tab and address bar, handle, sentences, speak button, light and dark) and flags shared monograms, awkward possessives, long names and letters that blur at small sizes. Example `name_preview.html`.
 - **Voice and tone** skill: 3–5 principles as "this, not that" pairs with before/after rewrites, tone by context, vocabulary to prefer and avoid, and mechanics. `scripts/lint-voice.mjs` screens copy for avoided phrases, preferred words, case, contractions, exclamation marks, emoji and sentence length. Example voice and onboarding copy for Aurel.
 - **Direction to tokens** skill: colour roles, type, space, radius and motion tokens with a reason per value, in Design Tokens format with aliases. `scripts/tokens.mjs` exports CSS custom properties and reports contrast for declared pairs plus a full text-on-background matrix. Example `tokens.json` for Aurel.
 
 ### Changed
+- README rewritten as a front door: quick start, skills by stage, scripts, links to the guides.
 - CI also runs the tokens contrast report and the voice linter (revised copy must pass, off-voice copy must fail).
 - The validator checks that a voice guide's own examples follow its avoid list.
 - The validator reports a missing `SKILL.md` instead of crashing, supports token groups, and only requires `schema.json` for skills that return JSON.
