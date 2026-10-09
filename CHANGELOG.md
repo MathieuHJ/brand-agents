@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- **Claims register** skill: tag every product claim Shipped, Beta, Planned, Proposed or Retired with a source, then screen copy with `scripts/check-copy.mjs` (unreleased features in the present tense, unqualified beta claims, universal promises, banned phrases, unsourced numbers). Example register and launch copy in `brands/test_project/`.
+- The validator accepts nullable fields and checks claims registers.
+
 ## 0.2.0 — 2026-10-09
 
 ### Changed

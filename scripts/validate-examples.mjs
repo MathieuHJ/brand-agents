@@ -14,6 +14,7 @@ const OUTPUTS = {
   'art_direction.json': 'art-direction-extractor',
   'naming_candidates.json': 'brand-naming-rubric',
   'logo_directions.json': 'logo-identity-directions',
+  'claims_register.json': 'claims-register',
 };
 
 const errors = [];
@@ -24,8 +25,9 @@ const fail = (where, message) => errors.push(`${where}: ${message}`);
 function check(schema, value, path, where) {
   const type = Array.isArray(value) ? 'array' : value === null ? 'null' : typeof value;
   if (schema.type) {
-    const ok = schema.type === 'integer' ? Number.isInteger(value) : schema.type === type;
-    if (!ok) return fail(where, `${path} should be ${schema.type}, got ${type}`);
+    const types = [].concat(schema.type);
+    const ok = types.some((t) => (t === 'integer' ? Number.isInteger(value) : t === type));
+    if (!ok) return fail(where, `${path} should be ${types.join(' or ')}, got ${type}`);
   }
   if (schema.enum && !schema.enum.includes(value)) fail(where, `${path} must be one of ${schema.enum.join(', ')}`);
   if (type === 'string') {
@@ -94,6 +96,12 @@ const RULES = {
       if (new Set(data[list]).size !== data[list].length) fail(where, `${list} has duplicates`);
     for (const f of data.filtered_out ?? [])
       if (names.includes(f.name)) fail(where, `${f.name} is both filtered out and in top_10`);
+  },
+  'claims-register'(data, where) {
+    const ids = data.claims.map((c) => c.id);
+    if (new Set(ids).size !== ids.length) fail(where, 'claim ids must be unique');
+    for (const c of data.claims)
+      if (c.status !== 'planned' && c.surfaces?.length) fail(where, `${c.id} lists surfaces, which only apply to planned claims`);
   },
   'logo-identity-directions'(data, where) {
     const names = data.directions.map((d) => d.direction_name);

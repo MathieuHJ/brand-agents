@@ -11,8 +11,9 @@ The skills are plain Markdown in the [Agent Skills](https://agentskills.io) form
 | [Art direction extractor](skills/art-direction-extractor/SKILL.md) | Mood-board images; optionally audience, adjectives, competitors, things to avoid | Evidence-backed rules for colour, type, imagery, layout and motion, an accessibility pass, and hand-offs for logo, UI and content |
 | [Brand naming rubric](skills/brand-naming-rubric/SKILL.md) | The idea, audience, tone, markets and constraints | A check on whether it needs a name at all, ranked names with pronunciation and linguistic notes, a kill screen, and a clearance to-do list |
 | [Logo and identity directions](skills/logo-identity-directions/SKILL.md) | A chosen name, ideally with an art direction JSON | 3–5 distinct directions with lockup, 16px and motion behaviour, clichés to avoid, and a comparable scorecard |
+| [Claims register](skills/claims-register/SKILL.md) | Product facts and their release state; later, the copy to check | A register of what you may claim (Shipped, Beta, Planned, Proposed, Retired), and a script that flags copy running ahead of the product |
 
-They chain: **references → art direction → name → identity directions**. Each can also run alone.
+They chain: **references → art direction → name → identity directions**, with the claims register keeping launch copy honest. Each can also run alone.
 
 ## Install
 
@@ -39,9 +40,29 @@ Ask naturally; the skill descriptions tell the agent when to load them.
 
 Only share references and briefs you are allowed to send to your assistant's provider.
 
+## Check copy against the register
+
+The claims register ships with a small checker. No dependencies:
+
+```sh
+node skills/claims-register/scripts/check-copy.mjs brands/test_project/claims_register.json brands/test_project/launch_copy.md
+```
+
+```text
+P0  line 9 C4  Works offline, so a bad connection never stops a class.
+    Planned claim written as if it already works. Use future tense, or cut it.
+
+P1  line 7 C3  Results sync straight to Canvas and Moodle.
+    Beta claim without a qualifier such as "in beta" or "early access".
+
+3 P0 · 6 P1 · 1 P2 · claims used: C1, C2, C3, C4, C5
+```
+
+It exits with code 1 on any P0, so it can run in CI. It matches words, so treat it as a screen, not a verdict.
+
 ## Examples
 
-[`brands/test_project/`](brands/test_project/) holds one output per skill: [art direction](brands/test_project/art_direction.json), [naming](brands/test_project/naming_candidates.json) and [identity directions](brands/test_project/logo_directions.json). The naming example is a separate brief from the other two. Names are illustrative and have not been cleared.
+[`brands/test_project/`](brands/test_project/) holds one output per skill: [art direction](brands/test_project/art_direction.json), [naming](brands/test_project/naming_candidates.json), [identity directions](brands/test_project/logo_directions.json) and a [claims register](brands/test_project/claims_register.json) with [launch copy](brands/test_project/launch_copy.md) that fails it and a [revision](brands/test_project/launch_copy_revised.md) that passes. Naming and claims share one fictional product; art direction and identity directions share another. Names are illustrative and have not been cleared.
 
 ## Validate
 
@@ -57,7 +78,7 @@ This checks every skill's frontmatter and every example against its skill's `sch
 node scripts/validate-examples.mjs path/to/naming_candidates.json
 ```
 
-The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`).
+The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`).
 
 ## How the skills think
 
