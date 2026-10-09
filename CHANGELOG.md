@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- **Direction to tokens** skill: colour roles, type, space, radius and motion tokens with a reason per value, in Design Tokens format with aliases. `scripts/tokens.mjs` exports CSS custom properties and reports contrast for declared pairs plus a full text-on-background matrix. Example `tokens.json` for Aurel.
+
+### Changed
+- The validator reports a missing `SKILL.md` instead of crashing, supports token groups, and only requires `schema.json` for skills that return JSON.
+
 ## 0.3.0 — 2026-10-09
 
 ### Added

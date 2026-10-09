@@ -8,6 +8,7 @@ Illustrative outputs for two fictional products. Names have not been cleared and
 |---|---|
 | Brief | [brief.json](brief.json) |
 | Art direction | [art_direction.json](art_direction.json) |
+| Design tokens | [tokens.json](tokens.json) |
 | Identity directions | [logo_directions.json](logo_directions.json) |
 | QA of an app store screenshot | [qa_scorecard.json](qa_scorecard.json) |
 

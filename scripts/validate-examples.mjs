@@ -5,6 +5,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { basename, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { score } from '../skills/asset-qa-scorecard/scripts/score.mjs';
+import { checkPairs } from '../skills/direction-to-tokens/scripts/tokens.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const skillsDir = join(root, 'skills');
@@ -18,6 +19,7 @@ const OUTPUTS = {
   'claims_register.json': 'claims-register',
   'qa_scorecard.json': 'asset-qa-scorecard',
   'brief.json': 'brand-brief-intake',
+  'tokens.json': 'direction-to-tokens',
 };
 
 const errors = [];
@@ -52,6 +54,7 @@ function check(schema, value, path, where) {
       const sub = schema.properties?.[key];
       if (sub) check(sub, child, `${path}.${key}`, where);
       else if (schema.additionalProperties === false) fail(where, `${path} has unknown field "${key}"`);
+      else if (typeof schema.additionalProperties === 'object') check(schema.additionalProperties, child, `${path}.${key}`, where);
     }
   }
 }
@@ -124,6 +127,18 @@ const RULES = {
     if (data.stage === 'sub-brand' && !data.parent_brand) fail(where, 'stage "sub-brand" needs a parent_brand');
     if (data.project.name_status !== 'needed' && !data.project.working_name) fail(where, 'name_status says a name exists but working_name is empty');
   },
+  'direction-to-tokens'(data, where) {
+    let pairs = [];
+    try {
+      pairs = checkPairs(data);
+    } catch (e) {
+      return fail(where, e.message);
+    }
+    for (const p of pairs)
+      if (!p.pass) fail(where, `${p.text} on ${p.background} is ${p.ratio}:1, below the declared ${p.min} (${p.use})`);
+    const roles = new Set(Object.values(data.color).map((c) => c.role));
+    for (const role of ['background', 'text']) if (!roles.has(role)) fail(where, `no colour has the "${role}" role`);
+  },
   'logo-identity-directions'(data, where) {
     const names = data.directions.map((d) => d.direction_name);
     if (new Set(names).size !== names.length) fail(where, 'direction names must be unique');
@@ -156,7 +171,13 @@ async function validateSkills() {
   for (const dir of (await readdir(skillsDir, { withFileTypes: true })).filter((d) => d.isDirectory())) {
     const where = `skills/${dir.name}/SKILL.md`;
     const before = errors.length;
-    const text = await readFile(join(skillsDir, dir.name, 'SKILL.md'), 'utf8');
+    let text;
+    try {
+      text = await readFile(join(skillsDir, dir.name, 'SKILL.md'), 'utf8');
+    } catch {
+      fail(where, 'missing SKILL.md');
+      continue;
+    }
     const front = text.match(/^---\n([\s\S]*?)\n---\n/)?.[1];
     if (!front) { fail(where, 'missing frontmatter'); continue; }
     const name = front.match(/^name:\s*(.+)$/m)?.[1].trim();
@@ -165,10 +186,13 @@ async function validateSkills() {
     if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(name ?? '') || name.length > 64) fail(where, 'name must be kebab-case, max 64 chars');
     if (!description || description.length > 1024) fail(where, 'description is required, max 1024 chars');
     if (!/\bUse when\b/.test(description)) fail(where, 'description should say "Use when …" so agents know when to load it');
-    try {
-      await loadSchema(dir.name);
-    } catch {
-      fail(where, 'schema.json missing or invalid next to SKILL.md');
+    // Skills that return JSON say so by referring to their schema.json.
+    if (text.includes('schema.json')) {
+      try {
+        await loadSchema(dir.name);
+      } catch {
+        fail(where, 'schema.json missing or invalid next to SKILL.md');
+      }
     }
     for (const [, block] of text.matchAll(/```json\n([\s\S]*?)```/g)) {
       try { JSON.parse(block); } catch (e) { fail(where, `example JSON block does not parse (${e.message})`); }
