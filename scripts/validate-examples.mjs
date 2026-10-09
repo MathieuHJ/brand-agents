@@ -20,6 +20,7 @@ const OUTPUTS = {
   'qa_scorecard.json': 'asset-qa-scorecard',
   'brief.json': 'brand-brief-intake',
   'tokens.json': 'direction-to-tokens',
+  'voice.json': 'voice-and-tone',
 };
 
 const errors = [];
@@ -138,6 +139,21 @@ const RULES = {
       if (!p.pass) fail(where, `${p.text} on ${p.background} is ${p.ratio}:1, below the declared ${p.min} (${p.use})`);
     const roles = new Set(Object.values(data.color).map((c) => c.role));
     for (const role of ['background', 'text']) if (!roles.has(role)) fail(where, `no colour has the "${role}" role`);
+  },
+  'voice-and-tone'(data, where) {
+    // The guide's own good examples must follow its own avoid list.
+    const good = [
+      ...data.principles.map((p) => p.after),
+      ...data.tone_by_context.map((c) => c.example),
+      ...data.rewrites.map((r) => r.after),
+    ];
+    for (const a of data.vocabulary.avoid) {
+      const re = new RegExp(`(^|[^\\p{L}])${a.phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|[^\\p{L}])`, 'iu');
+      for (const line of good) if (re.test(line)) fail(where, `example "${line}" uses avoided phrase "${a.phrase}"`);
+    }
+    if (data.mechanics.exclamation_marks === 'never')
+      for (const line of good) if (line.includes('!')) fail(where, `example "${line}" uses an exclamation mark`);
+    for (const p of data.principles) if (p.before === p.after) fail(where, `principle "${p.name}" has identical before and after`);
   },
   'logo-identity-directions'(data, where) {
     const names = data.directions.map((d) => d.direction_name);

@@ -13,10 +13,11 @@ The skills are plain Markdown in the [Agent Skills](https://agentskills.io) form
 | [Brand naming rubric](skills/brand-naming-rubric/SKILL.md) | The idea, audience, tone, markets and constraints | A check on whether it needs a name at all, ranked names with pronunciation and linguistic notes, a kill screen, and a clearance to-do list |
 | [Logo and identity directions](skills/logo-identity-directions/SKILL.md) | A chosen name, ideally with an art direction JSON | 3–5 distinct directions with lockup, 16px and motion behaviour, clichés to avoid, and a comparable scorecard |
 | [Direction to tokens](skills/direction-to-tokens/SKILL.md) | An art direction JSON, a brief or existing brand colours | Design tokens with a reason per value, CSS custom properties, and a contrast report for every text and background pair |
+| [Voice and tone](skills/voice-and-tone/SKILL.md) | A brief, existing copy samples, category copy to avoid | Voice principles with before/after rewrites, tone by context, words to prefer and avoid, mechanics, and a linter that checks copy against them |
 | [Claims register](skills/claims-register/SKILL.md) | Product facts and their release state; later, the copy to check | A register of what you may claim (Shipped, Beta, Planned, Proposed, Retired), and a script that flags copy running ahead of the product |
 | [Asset QA scorecard](skills/asset-qa-scorecard/SKILL.md) | A finished asset, where it runs, and the brand rules | A weighted 100-point review with hard failures, evidence and fixes; a script computes the total and the pass, revise or reject verdict |
 
-They chain: **brief → art direction → tokens → name → identity directions → claims → QA**. The brief says which skill is ready to run next. Each can also run alone.
+They chain: **brief → art direction → tokens → name → identity directions → voice → claims → QA**. The brief says which skill is ready to run next. Each can also run alone.
 
 ## Install
 
@@ -100,7 +101,7 @@ This checks every skill's frontmatter and every example against its skill's `sch
 node scripts/validate-examples.mjs path/to/naming_candidates.json
 ```
 
-The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`, `qa_scorecard.json`, `brief.json`, `tokens.json`).
+The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`, `qa_scorecard.json`, `brief.json`, `tokens.json`, `voice.json`).
 
 ## How the skills think
 

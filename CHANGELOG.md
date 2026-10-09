@@ -3,9 +3,12 @@
 ## Unreleased
 
 ### Added
+- **Voice and tone** skill: 3–5 principles as "this, not that" pairs with before/after rewrites, tone by context, vocabulary to prefer and avoid, and mechanics. `scripts/lint-voice.mjs` screens copy for avoided phrases, preferred words, case, contractions, exclamation marks, emoji and sentence length. Example voice and onboarding copy for Aurel.
 - **Direction to tokens** skill: colour roles, type, space, radius and motion tokens with a reason per value, in Design Tokens format with aliases. `scripts/tokens.mjs` exports CSS custom properties and reports contrast for declared pairs plus a full text-on-background matrix. Example `tokens.json` for Aurel.
 
 ### Changed
+- CI also runs the tokens contrast report and the voice linter (revised copy must pass, off-voice copy must fail).
+- The validator checks that a voice guide's own examples follow its avoid list.
 - The validator reports a missing `SKILL.md` instead of crashing, supports token groups, and only requires `schema.json` for skills that return JSON.
 
 ## 0.3.0 — 2026-10-09

@@ -1,0 +1,69 @@
+{
+  "brand": "Aurel",
+  "voice_summary": "A calm friend who keeps you company for five minutes: plain, warm and never preachy.",
+  "persona_test": "Would a tired parent reading this at 6:40 feel invited, not instructed?",
+  "principles": [
+    {
+      "name": "Quiet, not hushed",
+      "means": "Short sentences and plain words. The space does the work.",
+      "not": "Whispery, poetic or vague.",
+      "before": "Embark on a transformative journey of daily reflection.",
+      "after": "Five minutes. One reading, one question."
+    },
+    {
+      "name": "Invite, never instruct",
+      "means": "Offer the next step and leave the choice with the reader.",
+      "not": "Telling people what they should do, or what they've missed.",
+      "before": "You should pray every morning so you don't fall behind.",
+      "after": "Come back tomorrow, or whenever you're ready."
+    },
+    {
+      "name": "Warm, not sugary",
+      "means": "Notice what someone did, in their terms.",
+      "not": "Cheering, superlatives or praise for using the app.",
+      "before": "Amazing! You're on a 7-day streak!",
+      "after": "That's seven mornings this week."
+    },
+    {
+      "name": "Specific over spiritual-sounding",
+      "means": "Name the actual thing: the reading, the question, the time it takes.",
+      "not": "Abstract promises of peace, growth or transformation.",
+      "before": "Unlock deeper peace.",
+      "after": "Read today's passage."
+    }
+  ],
+  "tone_by_context": [
+    { "context": "Onboarding", "tone": ["welcoming", "brief"], "guidance": "Say what it is and how long it takes. One idea per screen.", "example": "One reading and one question a day. About five minutes." },
+    { "context": "Daily reading", "tone": ["quiet", "unhurried"], "guidance": "Stay out of the way. No interface chatter around the text.", "example": "Take a moment with this before you go on." },
+    { "context": "Reminders", "tone": ["gentle", "optional"], "guidance": "Never imply guilt or loss. Make it easy to change the time.", "example": "Today's reading is here when you want it." },
+    { "context": "Errors", "tone": ["plain", "practical"], "guidance": "Say what happened and what to do. No apology spiral, no jokes.", "example": "We couldn't load today's reading. Check your connection and try again." },
+    { "context": "App store", "tone": ["clear", "concrete"], "guidance": "Lead with what you get and how long it takes. Same claims as the claims register.", "example": "A short daily reading and one question to reflect on, in about five minutes." }
+  ],
+  "vocabulary": {
+    "prefer": [
+      { "word": "reading", "instead_of": ["content", "devotional content"] },
+      { "word": "a quiet moment", "instead_of": ["meditation session", "mindfulness session"] },
+      { "word": "remind me", "instead_of": ["push notifications"] }
+    ],
+    "avoid": [
+      { "phrase": "journey", "why": "The category's most worn cliché.", "instead": "Name the actual step: today's reading, this week." },
+      { "phrase": "unlock", "why": "Sounds like a game or a paywall.", "instead": "Read, open, start." },
+      { "phrase": "streak", "why": "The brief rules out guilt mechanics.", "instead": "Count what happened: three mornings this week." },
+      { "phrase": "amazing", "why": "Cheering, not warmth.", "instead": "Say what they did." },
+      { "phrase": "transform", "why": "An outcome we can't promise.", "instead": "Describe the five minutes, not the result." },
+      { "phrase": "you should", "why": "Instructs instead of inviting.", "instead": "You can, or when you're ready." }
+    ]
+  },
+  "mechanics": {
+    "case": "sentence",
+    "contractions": true,
+    "exclamation_marks": "never",
+    "emoji": "never",
+    "max_sentence_words": 20,
+    "numbers": "Numerals for counts and times (7 mornings, 5 minutes); words in reading text."
+  },
+  "rewrites": [
+    { "before": "Begin Your Journey", "after": "Five quiet minutes", "why": "Specific, sentence case, no cliché." },
+    { "before": "Welcome to Aurel! Unlock deeper peace with daily devotional content.", "after": "Welcome to Aurel. One reading, one question, and a moment to sit with it.", "why": "Names what you get; drops the exclamation and the promise." }
+  ]
+}

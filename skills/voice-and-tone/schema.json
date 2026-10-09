@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Voice and tone",
+  "type": "object",
+  "required": [
+    "brand",
+    "voice_summary",
+    "persona_test",
+    "principles",
+    "tone_by_context",
+    "vocabulary",
+    "mechanics",
+    "rewrites"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "brand": {
+      "type": "string",
+      "minLength": 1
+    },
+    "voice_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "persona_test": {
+      "type": "string",
+      "minLength": 1
+    },
+    "principles": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "means",
+          "not",
+          "before",
+          "after"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "means": {
+            "type": "string",
+            "minLength": 1
+          },
+          "not": {
+            "type": "string",
+            "minLength": 1
+          },
+          "before": {
+            "type": "string",
+            "minLength": 1
+          },
+          "after": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "tone_by_context": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "context",
+          "tone",
+          "guidance",
+          "example"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "context": {
+            "type": "string"
+          },
+          "tone": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": {
+              "type": "string"
+            }
+          },
+          "guidance": {
+            "type": "string"
+          },
+          "example": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "vocabulary": {
+      "type": "object",
+      "required": [
+        "prefer",
+        "avoid"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "prefer": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "word",
+              "instead_of"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "word": {
+                "type": "string"
+              },
+              "instead_of": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 2
+                }
+              }
+            }
+          }
+        },
+        "avoid": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "phrase",
+              "why",
+              "instead"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "phrase": {
+                "type": "string",
+                "minLength": 2
+              },
+              "why": {
+                "type": "string"
+              },
+              "instead": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "mechanics": {
+      "type": "object",
+      "required": [
+        "case",
+        "contractions",
+        "exclamation_marks",
+        "emoji"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "case": {
+          "type": "string",
+          "enum": [
+            "sentence",
+            "title"
+          ]
+        },
+        "contractions": {
+          "type": "boolean"
+        },
+        "exclamation_marks": {
+          "type": "string",
+          "enum": [
+            "never",
+            "rare",
+            "allowed"
+          ]
+        },
+        "emoji": {
+          "type": "string",
+          "enum": [
+            "never",
+            "rare",
+            "allowed"
+          ]
+        },
+        "max_sentence_words": {
+          "type": "integer",
+          "minimum": 5
+        },
+        "numbers": {
+          "type": "string"
+        }
+      }
+    },
+    "rewrites": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "before",
+          "after",
+          "why"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "before": {
+            "type": "string"
+          },
+          "after": {
+            "type": "string"
+          },
+          "why": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
