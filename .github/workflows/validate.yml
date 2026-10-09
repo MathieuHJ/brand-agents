@@ -24,3 +24,12 @@ jobs:
           fi
       - name: Scorecard script runs
         run: node skills/asset-qa-scorecard/scripts/score.mjs brands/test_project/qa_scorecard.json
+      - name: Tokens pass their declared contrast pairs
+        run: node skills/direction-to-tokens/scripts/tokens.mjs brands/test_project/tokens.json
+      - name: Voice linter passes the revised copy
+        run: node skills/voice-and-tone/scripts/lint-voice.mjs brands/test_project/voice.json brands/test_project/onboarding_copy_revised.md
+      - name: Voice linter flags the off-voice copy
+        run: |
+          if node skills/voice-and-tone/scripts/lint-voice.mjs brands/test_project/voice.json brands/test_project/onboarding_copy.md; then
+            echo "Expected P1 findings in onboarding_copy.md" && exit 1
+          fi

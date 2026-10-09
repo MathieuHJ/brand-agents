@@ -10,6 +10,9 @@ Illustrative outputs for two fictional products. Names have not been cleared and
 | Art direction | [art_direction.json](art_direction.json) |
 | Design tokens | [tokens.json](tokens.json) |
 | Identity directions | [logo_directions.json](logo_directions.json) |
+| Voice and tone | [voice.json](voice.json) |
+| Onboarding copy that breaks the voice | [onboarding_copy.md](onboarding_copy.md) |
+| Revised onboarding copy | [onboarding_copy_revised.md](onboarding_copy_revised.md) |
 | QA of an app store screenshot | [qa_scorecard.json](qa_scorecard.json) |
 
 **Numo**, a tool that turns lectures into polls and quizzes:
