@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- **Name in context** skill: `scripts/preview.mjs` turns a naming shortlist into an offline HTML page (wordmark in four type styles, app icon at 60/29/16px, browser tab and address bar, handle, sentences, speak button, light and dark) and flags shared monograms, awkward possessives, long names and letters that blur at small sizes. Example `name_preview.html`.
 - **Voice and tone** skill: 3–5 principles as "this, not that" pairs with before/after rewrites, tone by context, vocabulary to prefer and avoid, and mechanics. `scripts/lint-voice.mjs` screens copy for avoided phrases, preferred words, case, contractions, exclamation marks, emoji and sentence length. Example voice and onboarding copy for Aurel.
 - **Direction to tokens** skill: colour roles, type, space, radius and motion tokens with a reason per value, in Design Tokens format with aliases. `scripts/tokens.mjs` exports CSS custom properties and reports contrast for declared pairs plus a full text-on-background matrix. Example `tokens.json` for Aurel.
 

@@ -33,3 +33,5 @@ jobs:
           if node skills/voice-and-tone/scripts/lint-voice.mjs brands/test_project/voice.json brands/test_project/onboarding_copy.md; then
             echo "Expected P1 findings in onboarding_copy.md" && exit 1
           fi
+      - name: Name preview builds
+        run: node skills/name-in-context/scripts/preview.mjs brands/test_project/naming_candidates.json --out "$RUNNER_TEMP/name-preview.html"
