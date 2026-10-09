@@ -1,0 +1,75 @@
+{
+  "brand_name": "Aurel",
+  "core_tension": "Reverent but approachable: it must feel quiet and sacred without becoming solemn, generic or churchy.",
+  "parent_relationship": "none",
+  "directions": [
+    {
+      "direction_name": "Open Halo",
+      "strategic_intent": "Own a single, simple symbol that reads as light and attention, so the app icon carries the brand on its own.",
+      "logo_concept": {
+        "mark_type": "combination",
+        "geometry": "An incomplete ring, open at the top right, with even stroke and rounded terminals",
+        "notes": "The gap suggests an invitation rather than a closed halo; avoids a literal religious symbol."
+      },
+      "typography_approach": "Rounded humanist sans in lowercase, medium weight, slightly open tracking",
+      "color_logic": "One-colour mark in the deep text colour; the lavender accent appears only as a soft fill behind the icon",
+      "lockups": "Symbol + wordmark horizontally for web; symbol alone for app icon and avatars. Never symbol, wordmark and tagline together.",
+      "small_size_behavior": "The open ring holds at 16px if the stroke is at least 2px; the gap must stay visible.",
+      "motion_behavior": "The ring draws itself closed to the gap once on first launch (400ms ease-out); reduced motion shows the final ring.",
+      "personality_keywords": ["serene", "open", "luminous"],
+      "pros": ["Strong, ownable icon", "Simple to produce and animate"],
+      "risks": ["Rings are common in wellness and loading spinners", "Can read as a generic halo if the gap is lost"],
+      "cliche_to_avoid": "A closed glowing halo or a sunrise behind the ring",
+      "best_use_cases": ["App icon", "Notification badge", "Social avatar"],
+      "scorecard": { "distinctiveness": 3, "strategic_fit": 4, "scalability": 5, "legibility": 5, "production_effort": 5 }
+    },
+    {
+      "direction_name": "Quiet Wordmark",
+      "strategic_intent": "Make the name itself the identity, trusting typography and space instead of a symbol.",
+      "logo_concept": {
+        "mark_type": "wordmark",
+        "geometry": "Custom-drawn lowercase letters with softened joins; the 'a' and 'e' share an open counter shape",
+        "notes": "The shared counter is the only detail; everything else is restraint."
+      },
+      "typography_approach": "Custom wordmark derived from a rounded humanist sans; the same family sets headlines",
+      "color_logic": "Deep text colour on light ground; reversed to the ground colour on photography",
+      "lockups": "Wordmark alone, or wordmark + a small accent dot replacing the full stop in taglines.",
+      "small_size_behavior": "Needs a lettermark fallback ('a' in a rounded tile) for favicon and app icon.",
+      "motion_behavior": "Letters fade in left to right over 600ms; reduced motion shows the wordmark at once.",
+      "personality_keywords": ["literate", "calm", "assured"],
+      "pros": ["Most timeless", "Easy to apply across print and UI"],
+      "risks": ["Low recognition at small sizes", "Depends on careful letter drawing to feel distinctive"],
+      "cliche_to_avoid": "Thin, wide-tracked luxury wordmark that looks like a spa",
+      "best_use_cases": ["Website header", "Editorial content", "Merchandise"],
+      "scorecard": { "distinctiveness": 3, "strategic_fit": 4, "scalability": 3, "legibility": 5, "production_effort": 4 }
+    },
+    {
+      "direction_name": "Wreath System",
+      "strategic_intent": "Build a flexible frame from the wreath and cloud motifs so the identity lives in layouts, not just the logo.",
+      "logo_concept": {
+        "mark_type": "system",
+        "geometry": "A modular set of soft leaf and cloud segments that assemble into partial frames around content",
+        "notes": "The logo is a compact two-segment arrangement; layouts use larger arrangements."
+      },
+      "typography_approach": "Rounded sans for UI paired with a gentle serif for scripture and quotes",
+      "color_logic": "Segments in sage and lavender fills at low contrast; text always on solid ground",
+      "lockups": "Two-segment mark + wordmark for formal use; segments frame content without the wordmark in campaigns.",
+      "small_size_behavior": "The two-segment mark merges into a single blob below 24px; use the wordmark's first letter instead.",
+      "motion_behavior": "Segments drift into place around a card (500ms, staggered); reduced motion shows the assembled frame.",
+      "personality_keywords": ["warm", "crafted", "gentle"],
+      "pros": ["Rich, recognisable layouts", "Extends naturally to illustration and social"],
+      "risks": ["Most expensive to produce and govern", "Can become decorative clutter"],
+      "cliche_to_avoid": "Olive branches and doves",
+      "best_use_cases": ["Social posts", "Onboarding screens", "Seasonal campaigns"],
+      "scorecard": { "distinctiveness": 4, "strategic_fit": 5, "scalability": 3, "legibility": 3, "production_effort": 2 }
+    }
+  ],
+  "explore_first": {
+    "direction_name": "Open Halo",
+    "reason": "The app icon is the first surface people meet, and this is the only direction that holds at 16px without a fallback. The Wreath System could later sit on top of it as the layout language."
+  },
+  "open_questions": [
+    "Is the app icon or the website the first launch surface?",
+    "Should the identity signal a specific tradition or stay broadly spiritual?"
+  ]
+}

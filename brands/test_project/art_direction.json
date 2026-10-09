@@ -1,77 +1,78 @@
 {
-  "style_keywords": [
-    "calm",
-    "devotional",
-    "airy",
-    "soft",
-    "gentle",
-    "uplifting",
-    "clean",
-    "minimal"
+  "summary": "Quiet, airy and reverent: soft pastel light, rounded forms and generous space, warm enough to feel human rather than clinical.",
+  "references": [
+    { "id": "R1", "description": "Soft gradient UI cards", "key_choice": "Pale blue-to-lavender gradients behind rounded cards" },
+    { "id": "R2", "description": "Rounded buttons and icons", "key_choice": "Fully rounded controls with thin, even line icons" },
+    { "id": "R3", "description": "Clouds and wreath motifs", "key_choice": "Gentle organic shapes framing the content" },
+    { "id": "R4", "description": "Pastel devotional tiles", "key_choice": "Muted sage and lavender fills with quiet serif-free type" },
+    { "id": "R5", "description": "Minimal photo covers with quiet type", "key_choice": "Soft-focus natural light photography, small type, lots of air" }
   ],
+  "observations": [
+    { "pattern": "Cool pastel palette (pale blue, lavender, sage) with low contrast between surfaces", "evidence": ["R1", "R4", "R5"] },
+    { "pattern": "Rounded geometry everywhere: cards, buttons, icons, motifs", "evidence": ["R1", "R2", "R3"] },
+    { "pattern": "Depth comes from gradients and translucency, not borders or shadows", "evidence": ["R1", "R4"] },
+    { "pattern": "Type is small, light and well spaced; hierarchy is quiet", "evidence": ["R4", "R5"] }
+  ],
+  "style_keywords": ["calm", "devotional", "airy", "soft", "gentle", "uplifting", "clean", "minimal"],
   "style_axes": [
-    {
-      "axis": "minimal ↔ expressive",
-      "target": "minimal with a touch of warmth (70/30)"
-    },
-    {
-      "axis": "soft ↔ sharp",
-      "target": "soft, rounded, no sharp edges"
-    },
-    {
-      "axis": "playful ↔ reverent",
-      "target": "reverent but approachable (20/80)"
-    },
-    {
-      "axis": "flat ↔ dimensional",
-      "target": "light dimensionality via gradients and subtle shadows"
-    }
+    { "axis": "minimal ↔ expressive", "position": 30, "target": "Minimal with a touch of warmth; one expressive motif per screen at most" },
+    { "axis": "soft ↔ sharp", "position": 10, "target": "Soft and rounded; no sharp corners on any interactive element" },
+    { "axis": "playful ↔ reverent", "position": 80, "target": "Reverent but approachable; never solemn or heavy" },
+    { "axis": "flat ↔ dimensional", "position": 40, "target": "Light dimensionality from gradients and translucency, not drop shadows" }
   ],
   "color_mood": {
-    "description": "Cool, pastel-leaning palette with pale blues, lavender, sage, and muted neutrals; gentle gradients for depth.",
-    "avoid": [
-      "high-contrast neon",
-      "harsh black-and-white",
-      "overly saturated primaries"
-    ]
+    "description": "Cool, pastel-leaning palette with pale blues, lavender, sage and muted neutrals; gentle gradients for depth. Text needs a deep, warm-grey anchor so the softness stays readable.",
+    "palette_candidates": [
+      { "hex": "#F4F6FA", "role": "ground", "source": "proposed" },
+      { "hex": "#2F3442", "role": "text", "source": "proposed" },
+      { "hex": "#8C84C7", "role": "accent (fills and illustration only)", "source": "proposed" }
+    ],
+    "avoid": ["high-contrast neon", "harsh pure black on pure white", "overly saturated primaries"]
   },
   "typography_mood": {
-    "description": "Clean, friendly sans-serif with soft geometry, medium weights, and generous spacing; clear, quiet hierarchy.",
+    "description": "Clean, friendly sans-serif with soft geometry, medium weights and generous spacing; clear, quiet hierarchy.",
     "dos": [
-      "use rounded or humanist sans",
-      "keep type sizes modest and readable",
+      "use a rounded or humanist sans",
+      "keep body text at 16px or larger with 1.5 line height",
       "add breathing room between lines and sections"
     ],
     "donts": [
       "use sharp geometric or ultra-condensed fonts",
-      "overuse bold weights",
-      "stack many type styles"
+      "set body text in light weights on pastel grounds",
+      "stack more than two type styles on one screen"
     ]
   },
   "imagery_rules": {
     "photography_or_illustration": "Serene photography or soft, minimal illustration; imagery feels contemplative and airy.",
-    "dos": [
-      "use natural light and soft focus",
-      "favor subtle silhouettes and gentle shapes",
-      "keep imagery uncluttered"
-    ],
-    "donts": [
-      "use busy scenes",
-      "use high-drama lighting",
-      "use gritty or harsh textures"
-    ]
+    "dos": ["use natural light and soft focus", "favour subtle silhouettes and gentle shapes", "keep imagery uncluttered"],
+    "donts": ["use busy scenes", "use high-drama lighting", "use gritty or harsh textures"]
   },
   "layout_rules": {
     "dos": [
-      "use card-based modules with rounded corners",
+      "use card-based modules with 16–24px corner radius",
       "layer translucent panels for depth",
-      "maintain generous margins and spacing"
+      "keep generous margins and spacing"
     ],
-    "donts": [
-      "use dense grids with tight gutters",
-      "add heavy borders or hard outlines",
-      "overcrowd screens with controls"
-    ]
+    "donts": ["use dense grids with tight gutters", "add heavy borders or hard outlines", "overcrowd screens with controls"]
+  },
+  "motion_rules": {
+    "description": "Slow, settling motion: things fade and drift into place rather than snapping.",
+    "dos": ["use long ease-out curves (300–500ms)", "fall back to the final state instantly when reduced motion is on"],
+    "donts": ["bounce or overshoot", "loop ambient animation behind text"]
+  },
+  "cliche_watch": {
+    "risk": "Generic meditation-app look: lavender gradient, lotus, sunrise.",
+    "guardrail": "No lotus, sunrise or praying-hands icons; one gradient per screen; let the wreath/cloud motif be the only ornament."
+  },
+  "accessibility_watchouts": [
+    "Pastel text on pastel grounds will fail WCAG AA; keep text on the deep text colour and use the accent for fills only",
+    "Thin icons on gradients lose definition; check 3:1 against the lightest point of the gradient",
+    "Translucent panels over photography need a solid fallback for legibility"
+  ],
+  "handoffs": {
+    "logo": ["Explore rounded, open forms that work in one colour", "Test at 16px before adding any gradient"],
+    "ui": ["Define one ground, one text colour and one accent as tokens first", "Build the card and button with the final radius before any screens"],
+    "content": ["Shoot or source soft natural-light imagery with no people in focus", "Keep headlines short; the space does the talking"]
   },
   "references_summary": [
     "Soft gradient UI cards",
@@ -80,8 +81,13 @@
     "Pastel devotional tiles",
     "Minimal photo covers with quiet type"
   ],
+  "assumptions": [
+    "Primary surface is a mobile app, with social and app-store assets second",
+    "Audience is adults using the app daily in quiet moments",
+    "Hex values are proposals to test, not sampled from the references"
+  ],
   "risks_or_watchouts": [
-    "Over-softening can reduce contrast/readability",
+    "Over-softening can reduce contrast and readability",
     "Too many gradients can feel dated or cliché",
     "Avoid slipping into generic meditation-app tropes"
   ]

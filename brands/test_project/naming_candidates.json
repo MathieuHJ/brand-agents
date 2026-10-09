@@ -1,217 +1,134 @@
 {
   "idea": "A minimalist tool that turns lectures into interactive polls and quizzes.",
   "assumptions": [
-    "English-friendly, global audience, 1-2 syllables preferred",
-    "No abbreviations unless they read as standalone words"
+    "English-first, global audience of educators; 1–2 syllables preferred",
+    "No abbreviations unless they read as standalone words",
+    "Standalone product, not part of a parent brand"
   ],
+  "architecture_recommendation": "Standalone name: it targets educators directly, needs its own app listing and domain, and has no parent brand to lean on.",
   "top_10": [
     {
       "name": "Numo",
+      "strategy": "invented",
+      "pronunciation": "NOO-moh",
       "score_total": 22,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 5,
-        "distinctiveness": 4,
-        "semantic_fit": 4,
-        "visual_potential": 5
-      },
-      "rationale": "Short, precise, modern; subtle numeric/precision cue without being literal.",
-      "risks": [
-        "Light math association"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".io"
-      ]
+      "scores": { "memorability": 4, "pronounceability": 5, "distinctiveness": 4, "semantic_fit": 4, "visual_potential": 5 },
+      "rationale": "Short, precise, modern; a subtle numeric cue without being literal. Four round letters make a strong wordmark.",
+      "linguistic_notes": ["No known negative meaning in English; check other target languages before shortlisting"],
+      "risks": ["Light maths association may read as quantitative-only"],
+      "recommended_domain_checks": [".com", ".io"]
     },
     {
       "name": "Verveo",
+      "strategy": "invented",
+      "pronunciation": "VER-vee-oh",
       "score_total": 21,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 4,
-        "distinctiveness": 4,
-        "semantic_fit": 4,
-        "visual_potential": 5
-      },
-      "rationale": "Confident and smooth; feels modern and smart without being academic.",
-      "risks": [
-        "Three syllables"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".edu"
-      ]
+      "scores": { "memorability": 4, "pronounceability": 4, "distinctiveness": 4, "semantic_fit": 4, "visual_potential": 5 },
+      "rationale": "Built on 'verve'; confident and smooth, smart without sounding academic.",
+      "linguistic_notes": ["Three syllables; stress may drift to the second syllable for some speakers"],
+      "risks": ["Three syllables", "Close to 'Verve' brands in other categories"],
+      "recommended_domain_checks": [".com", ".app"]
     },
     {
       "name": "Quillix",
+      "strategy": "invented",
+      "pronunciation": "KWIL-iks",
       "score_total": 20,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 3,
-        "distinctiveness": 5,
-        "semantic_fit": 4,
-        "visual_potential": 4
-      },
-      "rationale": "Hints at lecture/writing with a modern tech edge; distinctive.",
-      "risks": [
-        "Spelling might need reinforcement"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".io"
-      ]
-    },
-    {
-      "name": "Pollis",
-      "score_total": 20,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 5,
-        "distinctiveness": 3,
-        "semantic_fit": 5,
-        "visual_potential": 3
-      },
-      "rationale": "Directly tied to polls without using the exact word; very clear.",
-      "risks": [
-        "Close to 'polis' in some regions"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".ai"
-      ]
+      "scores": { "memorability": 4, "pronounceability": 3, "distinctiveness": 5, "semantic_fit": 4, "visual_potential": 4 },
+      "rationale": "Hints at writing and lectures with a modern edge; distinctive in the category.",
+      "linguistic_notes": ["Fails the radio test for some listeners: 'Quilix' or 'Kwillix' are likely misspellings"],
+      "risks": ["Spelling needs reinforcement", "The -ix ending edges toward a tech cliché"],
+      "recommended_domain_checks": [".com", ".io"]
     },
     {
       "name": "Vetra",
+      "strategy": "invented",
+      "pronunciation": "VET-ruh",
       "score_total": 20,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 5,
-        "distinctiveness": 4,
-        "semantic_fit": 3,
-        "visual_potential": 4
-      },
+      "scores": { "memorability": 4, "pronounceability": 5, "distinctiveness": 4, "semantic_fit": 3, "visual_potential": 4 },
       "rationale": "Crisp and modern; feels like a precise tool brand.",
-      "risks": [
-        "Abstract meaning"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".io"
-      ]
+      "linguistic_notes": ["Resembles 'vetro' (glass, Italian); neutral"],
+      "risks": ["Abstract meaning needs a strong tagline"],
+      "recommended_domain_checks": [".com", ".io"]
+    },
+    {
+      "name": "Pollis",
+      "strategy": "altered-spelling",
+      "pronunciation": "POL-iss",
+      "score_total": 20,
+      "scores": { "memorability": 4, "pronounceability": 5, "distinctiveness": 3, "semantic_fit": 5, "visual_potential": 3 },
+      "rationale": "Directly tied to polls without using the plain word; very clear.",
+      "linguistic_notes": ["Sounds like 'polis' (city-state); may be heard as a surname in some regions"],
+      "risks": ["Semi-descriptive, so harder to protect", "Close to 'polis'"],
+      "recommended_domain_checks": [".com", ".app"]
     },
     {
       "name": "Lumor",
+      "strategy": "invented",
+      "pronunciation": "LOO-mor",
       "score_total": 19,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 4,
-        "distinctiveness": 4,
-        "semantic_fit": 3,
-        "visual_potential": 4
-      },
-      "rationale": "Calm and smart; subtle cue to signal/insight.",
-      "risks": [
-        "Meaning ambiguity"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".app"
-      ]
+      "scores": { "memorability": 4, "pronounceability": 4, "distinctiveness": 4, "semantic_fit": 3, "visual_potential": 4 },
+      "rationale": "Calm and smart; a soft cue to light and insight.",
+      "linguistic_notes": ["Could be heard as 'rumour' or 'humour' by some listeners"],
+      "risks": ["Meaning is ambiguous", "Many lum- names exist in software"],
+      "recommended_domain_checks": [".com", ".app"]
+    },
+    {
+      "name": "Murmur",
+      "strategy": "metaphor",
+      "pronunciation": "MUR-mur",
+      "score_total": 19,
+      "scores": { "memorability": 4, "pronounceability": 4, "distinctiveness": 3, "semantic_fit": 4, "visual_potential": 4 },
+      "rationale": "The sound of a room responding at once; suggests live participation without saying 'poll'. Repeated syllable makes a rhythmic wordmark.",
+      "linguistic_notes": ["Medical association ('heart murmur')", "The 'ur' vowel is harder for some non-native speakers"],
+      "risks": ["Common English word, likely used by other brands", "Can read as quiet or indistinct"],
+      "recommended_domain_checks": [".com", ".app"]
     },
     {
       "name": "Quietly",
+      "strategy": "real-word",
+      "pronunciation": "KWY-it-lee",
       "score_total": 18,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 5,
-        "distinctiveness": 3,
-        "semantic_fit": 3,
-        "visual_potential": 3
-      },
-      "rationale": "Matches calm, minimalist vibe; distinct in category.",
-      "risks": [
-        "Longer, common word"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".co"
-      ]
-    },
-    {
-      "name": "Swayze",
-      "score_total": 18,
-      "scores": {
-        "memorability": 4,
-        "pronounceability": 4,
-        "distinctiveness": 4,
-        "semantic_fit": 3,
-        "visual_potential": 3
-      },
-      "rationale": "Suggests audience movement/participation; memorable sound.",
-      "risks": [
-        "Surname association"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".io"
-      ]
+      "scores": { "memorability": 4, "pronounceability": 5, "distinctiveness": 3, "semantic_fit": 3, "visual_potential": 3 },
+      "rationale": "Matches the calm, minimal tone and stands out in a loud category.",
+      "linguistic_notes": ["Ordinary adverb; hard to own as a mark"],
+      "risks": ["Longer, common word", "Ends in -ly"],
+      "recommended_domain_checks": [".com", ".co"]
     },
     {
       "name": "Tallyn",
+      "strategy": "altered-spelling",
+      "pronunciation": "TAL-in",
       "score_total": 18,
-      "scores": {
-        "memorability": 3,
-        "pronounceability": 5,
-        "distinctiveness": 3,
-        "semantic_fit": 4,
-        "visual_potential": 3
-      },
-      "rationale": "Precise, modern; subtle counting signal without being cliché.",
-      "risks": [
-        "Spelling variants like Talin/Talin"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".ai"
-      ]
+      "scores": { "memorability": 3, "pronounceability": 5, "distinctiveness": 3, "semantic_fit": 4, "visual_potential": 3 },
+      "rationale": "From 'tally': precise and modern, a counting cue without the cliché.",
+      "linguistic_notes": ["Sounds like Tallinn, the Estonian capital", "Spelling variants Talin and Tallin are likely"],
+      "risks": ["Altered spelling must be explained aloud"],
+      "recommended_domain_checks": [".com", ".app"]
     },
     {
       "name": "Pivio",
+      "strategy": "invented",
+      "pronunciation": "PIV-ee-oh",
       "score_total": 17,
-      "scores": {
-        "memorability": 3,
-        "pronounceability": 4,
-        "distinctiveness": 4,
-        "semantic_fit": 3,
-        "visual_potential": 3
-      },
-      "rationale": "Short and clean; implies interaction pivot.",
-      "risks": [
-        "Abstract meaning"
-      ],
-      "recommended_domain_checks": [
-        ".com",
-        ".io"
-      ]
+      "scores": { "memorability": 3, "pronounceability": 4, "distinctiveness": 4, "semantic_fit": 3, "visual_potential": 3 },
+      "rationale": "Short and clean; implies a pivot in the conversation.",
+      "linguistic_notes": ["Stress may be read as pi-VEE-oh"],
+      "risks": ["Abstract meaning"],
+      "recommended_domain_checks": [".com", ".io"]
     }
   ],
-  "safe_5": [
-    "Pollis",
-    "Tallyn",
-    "Vetra",
-    "Numo",
-    "Pivio"
-  ],
-  "wildcard_5": [
-    "Quillix",
-    "Swayze",
-    "Lumor",
-    "Verveo",
-    "Quietly"
+  "safe_5": ["Pollis", "Tallyn", "Vetra", "Numo", "Pivio"],
+  "wildcard_5": ["Quillix", "Murmur", "Lumor", "Verveo", "Quietly"],
+  "filtered_out": [
+    { "name": "Swayze", "reason": "Kill screen: strongly associated with a well-known actor" },
+    { "name": "Quizly", "reason": "Kill screen: category cliché (-ly) and descriptive" },
+    { "name": "PollHub", "reason": "Kill screen: category cliché (-hub) and generic" }
   ],
   "next_steps": [
-    "Pick 3 finalists and run quick trademark and domain checks (.com + .io or .edu).",
-    "Say which direction you prefer (abstract vs. semi-descriptive) and I can refine."
+    "Pick 3 finalists and run trademark searches in the education and software classes for each target market.",
+    "Check company registries, app stores and social handles for the finalists.",
+    "Check .com plus one relevant open TLD for each finalist. Nothing here has been checked.",
+    "Say whether you prefer abstract or semi-descriptive names and the list can be refined."
   ]
 }

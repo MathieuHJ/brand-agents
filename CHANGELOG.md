@@ -1,0 +1,24 @@
+# Changelog
+
+## 0.2.0 — 2026-10-09
+
+### Changed
+- One source of truth: skills live in `skills/` with kebab-case folder names, as the Agent Skills format requires. `.claude/skills` and `.codex/skills` are links to it, replacing the duplicated `.codex` copies.
+- Renamed folders: `art_direction_extractor` → `art-direction-extractor`, `brand_naming_rubric` → `brand-naming-rubric`, `logo_identity_directions` → `logo-identity-directions`. Update any links to the old paths.
+- **Art direction extractor:** evidence-cited observations, splitting contradictory references into clusters, numeric style axes, sampled vs proposed colours, a cliché watch, an accessibility pass and hand-offs for logo, UI and content.
+- **Brand naming rubric:** a "does this need a name?" step, a kill screen, a scoring table with anchors, tagged strategies, pronunciation and linguistic notes, and an ordered clearance list. Restricted TLDs such as .edu are no longer suggested.
+- **Logo and identity directions:** now in `skills/` and documented in the README. Adds parent-brand relationship, lockup budget, 16px and one-colour tests, motion with reduced-motion fallback, cliché check and a comparable scorecard. Output is described as a JSON object (it was mislabelled as an array).
+
+### Added
+- `schema.json` next to each skill.
+- `scripts/validate-examples.mjs` now validates skill frontmatter and every example against its schema, plus score totals, ranking order, reference citations and WCAG text contrast. It accepts a path to check your own output.
+- `brands/test_project/logo_directions.json` example.
+- Claude Code plugin and marketplace manifests in `.claude-plugin/`.
+- `docs/principles.md`: lessons from past brand projects behind the skills.
+
+### Fixed
+- Naming example: removed a candidate that is a well-known actor's surname, replaced a restricted `.edu` domain suggestion, corrected a typo in a risk note, and fixed the tie-break order.
+
+## 0.1.0
+
+- Art direction extractor, brand naming rubric and logo identity directions skills, with example outputs.
