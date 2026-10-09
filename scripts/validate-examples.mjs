@@ -17,6 +17,7 @@ const OUTPUTS = {
   'logo_directions.json': 'logo-identity-directions',
   'claims_register.json': 'claims-register',
   'qa_scorecard.json': 'asset-qa-scorecard',
+  'brief.json': 'brand-brief-intake',
 };
 
 const errors = [];
@@ -114,6 +115,15 @@ const RULES = {
       if (d.below_floor !== data.dimensions[i].below_floor) fail(where, `${d.id} below_floor should be ${d.below_floor}`);
     });
   },
+  async 'brand-brief-intake'(data, where) {
+    const skills = new Set((await readdir(skillsDir, { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name));
+    const named = [...data.next_skills.map((s) => s.skill), ...data.open_questions.flatMap((q) => q.blocks ?? [])];
+    for (const name of named) if (!skills.has(name)) fail(where, `"${name}" is not a skill in this repo`);
+    for (const s of data.next_skills) if (!s.ready && !s.missing.length) fail(where, `${s.skill} is not ready but lists nothing missing`);
+    if (data.parent_brand && data.stage !== 'sub-brand') fail(where, 'a parent_brand is set but stage is not "sub-brand"');
+    if (data.stage === 'sub-brand' && !data.parent_brand) fail(where, 'stage "sub-brand" needs a parent_brand');
+    if (data.project.name_status !== 'needed' && !data.project.working_name) fail(where, 'name_status says a name exists but working_name is empty');
+  },
   'logo-identity-directions'(data, where) {
     const names = data.directions.map((d) => d.direction_name);
     if (new Set(names).size !== names.length) fail(where, 'direction names must be unique');
@@ -138,7 +148,7 @@ async function validateOutput(file) {
   }
   const before = errors.length;
   check(await loadSchema(skill), data, '$', where);
-  if (errors.length === before) RULES[skill]?.(data, where);
+  if (errors.length === before) await RULES[skill]?.(data, where);
   if (errors.length === before) console.log(`ok  ${where}`);
 }
 

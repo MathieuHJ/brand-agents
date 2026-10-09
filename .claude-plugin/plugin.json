@@ -1,7 +1,7 @@
 {
   "name": "brand-agents",
-  "version": "0.2.0",
-  "description": "Brand skills for art direction, naming and logo identity exploration, with structured JSON outputs.",
+  "version": "0.3.0",
+  "description": "Brand skills from brief to shipped asset: brief intake, art direction, naming, identity directions, claims register and asset QA, with structured JSON outputs.",
   "author": { "name": "MathieuHJ", "url": "https://github.com/MathieuHJ" },
   "homepage": "https://github.com/MathieuHJ/brand-agents",
   "repository": "https://github.com/MathieuHJ/brand-agents",

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Brand brief",
+  "type": "object",
+  "required": [
+    "project", "stage", "objective", "audiences", "positioning", "persona_test", "personality",
+    "parent_brand", "surfaces", "constraints", "deliverables", "assumptions", "open_questions", "next_skills"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["working_name", "name_status", "one_liner", "category"],
+      "additionalProperties": false,
+      "properties": {
+        "working_name": { "type": ["string", "null"] },
+        "name_status": { "type": "string", "enum": ["needed", "chosen", "existing"] },
+        "one_liner": { "type": "string", "minLength": 1 },
+        "category": { "type": ["string", "null"] }
+      }
+    },
+    "stage": { "type": "string", "enum": ["new-brand", "refresh", "sub-brand", "campaign", "asset"] },
+    "objective": { "type": "string", "minLength": 1 },
+    "audiences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "priority", "must_believe"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "priority": { "type": "string", "enum": ["primary", "secondary"] },
+          "context": { "type": ["string", "null"] },
+          "must_believe": { "type": "string" }
+        }
+      }
+    },
+    "positioning": {
+      "type": "object",
+      "required": ["problem", "promise", "proof", "differentiator", "competitors"],
+      "additionalProperties": false,
+      "properties": {
+        "problem": { "type": ["string", "null"] },
+        "promise": { "type": ["string", "null"] },
+        "proof": { "type": "array", "items": { "type": "string" } },
+        "differentiator": { "type": ["string", "null"] },
+        "competitors": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "persona_test": { "type": "string", "minLength": 1 },
+    "personality": {
+      "type": "object",
+      "required": ["is", "is_not"],
+      "additionalProperties": false,
+      "properties": {
+        "is": { "type": "array", "minItems": 3, "maxItems": 7, "items": { "type": "string" } },
+        "is_not": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "parent_brand": {
+      "type": ["object", "null"],
+      "required": ["name", "relationship", "inherit", "may_change"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "relationship": { "type": "string", "enum": ["sibling", "endorsed", "independent"] },
+        "inherit": { "type": "array", "items": { "type": "string" } },
+        "may_change": { "type": "array", "maxItems": 2, "items": { "type": "string" } }
+      }
+    },
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "priority"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "priority": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "required": ["must_include", "must_avoid", "languages", "markets"],
+      "additionalProperties": false,
+      "properties": {
+        "must_include": { "type": "array", "items": { "type": "string" } },
+        "must_avoid": { "type": "array", "items": { "type": "string" } },
+        "languages": { "type": "array", "items": { "type": "string" } },
+        "markets": { "type": "array", "items": { "type": "string" } },
+        "accessibility": { "type": ["string", "null"] },
+        "fixed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "deliverables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "format", "due"],
+        "additionalProperties": false,
+        "properties": {
+          "item": { "type": "string" },
+          "format": { "type": ["string", "null"] },
+          "due": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+        }
+      }
+    },
+    "budget": { "type": ["string", "null"] },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "owner"],
+        "additionalProperties": false,
+        "properties": {
+          "question": { "type": "string" },
+          "owner": { "type": "string" },
+          "blocks": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "next_skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["skill", "ready", "missing"],
+        "additionalProperties": false,
+        "properties": {
+          "skill": { "type": "string" },
+          "ready": { "type": "boolean" },
+          "missing": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}
