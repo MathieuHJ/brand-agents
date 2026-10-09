@@ -1,59 +1,61 @@
 # Brand Agents
 
-Agent skills for brand work, from the first fuzzy brief to the asset that ships: writing the brief, turning references into art direction, finding a name, exploring identity directions, keeping claims honest and reviewing the result. Each skill returns a readable summary plus JSON that matches a published schema, so outputs can be checked, compared and passed to the next step.
+Nine agent skills for brand work, from the first fuzzy brief to the asset that ships. They write the brief, turn references into art direction and tokens, find and stress-test a name, explore identity directions, define the voice, keep claims honest, and review the result.
 
-The skills are plain Markdown in the [Agent Skills](https://agentskills.io) format. They work in Claude Code, Codex and any assistant you can paste instructions into. There is no service to run.
+Each skill returns a readable summary plus JSON in a fixed format, so you can check outputs, compare them and pass them to the next step. Five small scripts handle the things a model shouldn't be trusted with: contrast ratios, score totals, copy checks and a name preview page. Everything is plain Markdown and dependency-free Node, in the [Agent Skills](https://agentskills.io) format. There is no service to run.
 
-## Skills
+**New here?** Read [Getting started](docs/getting-started.md) (install, first run, saving outputs), then [the workflow](docs/workflow.md) (a full project, step by step).
 
-| Skill | Bring | Get back |
-| --- | --- | --- |
-| [Brand brief intake](skills/brand-brief-intake/SKILL.md) | Whatever you have: notes, a deck, a website, or nothing | A structured brief with a persona test, unknowns left blank with an owner, and which skill can run next |
-| [Art direction extractor](skills/art-direction-extractor/SKILL.md) | Mood-board images; optionally audience, adjectives, competitors, things to avoid | Evidence-backed rules for colour, type, imagery, layout and motion, an accessibility pass, and hand-offs for logo, UI and content |
-| [Brand naming rubric](skills/brand-naming-rubric/SKILL.md) | The idea, audience, tone, markets and constraints | A check on whether it needs a name at all, ranked names with pronunciation and linguistic notes, a kill screen, and a clearance to-do list |
-| [Name in context](skills/name-in-context/SKILL.md) | A naming shortlist JSON, or a list of names | An offline HTML page showing each name as a wordmark, app icon, browser tab, handle and in sentences, with a speak button and flags for shared monograms and awkward possessives |
-| [Logo and identity directions](skills/logo-identity-directions/SKILL.md) | A chosen name, ideally with an art direction JSON | 3–5 distinct directions with lockup, 16px and motion behaviour, clichés to avoid, and a comparable scorecard |
-| [Direction to tokens](skills/direction-to-tokens/SKILL.md) | An art direction JSON, a brief or existing brand colours | Design tokens with a reason per value, CSS custom properties, and a contrast report for every text and background pair |
-| [Voice and tone](skills/voice-and-tone/SKILL.md) | A brief, existing copy samples, category copy to avoid | Voice principles with before/after rewrites, tone by context, words to prefer and avoid, mechanics, and a linter that checks copy against them |
-| [Claims register](skills/claims-register/SKILL.md) | Product facts and their release state; later, the copy to check | A register of what you may claim (Shipped, Beta, Planned, Proposed, Retired), and a script that flags copy running ahead of the product |
-| [Asset QA scorecard](skills/asset-qa-scorecard/SKILL.md) | A finished asset, where it runs, and the brand rules | A weighted 100-point review with hard failures, evidence and fixes; a script computes the total and the pass, revise or reject verdict |
+## Quick start
 
-They chain: **brief → art direction → tokens → name → name in context → identity directions → voice → claims → QA**. The brief says which skill is ready to run next. Each can also run alone.
+In Claude Code:
 
-## Install
-
-**Claude Code** (as a plugin):
-
-```sh
+```text
 /plugin marketplace add MathieuHJ/brand-agents
 /plugin install brand-agents@brand-agents
 ```
 
-**Inside this repo:** `.claude/skills` and `.codex/skills` are links to `skills/`, so Claude Code (and Codex, where it reads repo-level skills from `.codex/skills`) picks them up without copying. On Windows, Git may check these links out as plain files; copy the folders instead.
+Then describe the job:
 
-**Anywhere else:** copy a skill folder into your tool's skills directory, or paste its `SKILL.md` into the conversation. Use an image-capable model for mood boards.
+> Help me write a brand brief for a daily devotional app: one short reading and one question a day, for adults with a faith practice.
 
-## Use
+The brief ends by telling you which skill to run next. For Codex, Claude.ai or other assistants, see [Install](docs/getting-started.md#install).
 
-Ask naturally; the skill descriptions tell the agent when to load them.
+## The skills
 
-> Here are my notes and our pitch deck for a daily devotional app. Turn them into a brief and tell me what's missing.
+| Stage | Skill | Use it when | You get |
+|---|---|---|---|
+| Define | [Brand brief intake](skills/brand-brief-intake/SKILL.md) | Starting anything | A brief with a persona test, unknowns left blank with an owner, and the next skill to run |
+| Look | [Art direction extractor](skills/art-direction-extractor/SKILL.md) | You have a mood board or references | Rules for colour, type, imagery, layout and motion, each backed by the references, plus an accessibility pass |
+| Look | [Direction to tokens](skills/direction-to-tokens/SKILL.md) | You need a usable palette and type system | Design tokens with a reason per value, CSS variables, and a contrast report ⚙ |
+| Name | [Brand naming rubric](skills/brand-naming-rubric/SKILL.md) | You need a name, or aren't sure you need one | A "does it need a name?" check, a ranked shortlist with pronunciation and risks, rejected names, and a clearance list |
+| Name | [Name in context](skills/name-in-context/SKILL.md) | You have a shortlist to compare | An offline page with each name as icon, wordmark, URL, handle and in sentences, read aloud, with flags ⚙ |
+| Identity | [Logo and identity directions](skills/logo-identity-directions/SKILL.md) | A name is chosen | 3–5 distinct directions with lockups, 16px behaviour, motion and a scorecard |
+| Words | [Voice and tone](skills/voice-and-tone/SKILL.md) | You need writing rules | "This, not that" principles with rewrites, tone by context, vocabulary, and a copy linter ⚙ |
+| Words | [Claims register](skills/claims-register/SKILL.md) | Copy describes the product | Every claim with a status and source, and a checker that blocks copy running ahead of the product ⚙ |
+| Ship | [Asset QA scorecard](skills/asset-qa-scorecard/SKILL.md) | Something is about to ship | A 100-point review with evidence, hard failures, and a verdict computed by script ⚙ |
 
-> Name a tool that turns lectures into live polls and quizzes. It's for educators, English first, and it should feel clear and warm. Avoid anything that sounds like Kahoot or Mentimeter.
+⚙ ships with a script. Run them with Node.js 18+, no install step:
 
-> Here are eight references for a meditation journal. Pull out the art direction, and tell me if they disagree with each other.
+| Script | What it does |
+|---|---|
+| `skills/direction-to-tokens/scripts/tokens.mjs` | Contrast report for every text and background pair; `--css` exports CSS variables |
+| `skills/name-in-context/scripts/preview.mjs` | Builds the offline name preview page |
+| `skills/voice-and-tone/scripts/lint-voice.mjs` | Flags copy that breaks the voice guide |
+| `skills/claims-register/scripts/check-copy.mjs` | Flags claims the product can't back yet |
+| `skills/asset-qa-scorecard/scripts/score.mjs` | Computes the QA total, floors and verdict |
 
-> We picked "Aurel". Using this art direction JSON, give me identity directions. It's an app first.
+Usage, flags and exit codes are in [Getting started](docs/getting-started.md#run-the-scripts).
 
-Only share references and briefs you are allowed to send to your assistant's provider.
+## How a project flows
 
-## Check copy against the register
-
-The claims register ships with a small checker. No dependencies:
-
-```sh
-node skills/claims-register/scripts/check-copy.mjs brands/test_project/claims_register.json brands/test_project/launch_copy.md
+```text
+brief → art direction → tokens → naming → name in context → identity directions → voice → claims → QA
 ```
+
+Save each output in one project folder under its standard filename (`brief.json`, `art_direction.json`, `tokens.json`…), and hand it to the next skill. Most jobs need only part of the chain. [The workflow](docs/workflow.md) covers each step and some shorter paths ("just name it", "just check this copy").
+
+Here is a real result from the claims checker on the example copy:
 
 ```text
 P0  line 9 C4  Works offline, so a bad connection never stops a class.
@@ -65,54 +67,29 @@ P1  line 7 C3  Results sync straight to Canvas and Moodle.
 3 P0 · 6 P1 · 1 P2 · claims used: C1, C2, C3, C4, C5
 ```
 
-It exits with code 1 on any P0, so it can run in CI. It matches words, so treat it as a screen, not a verdict.
-
-## Score an asset
-
-The QA scorecard's script does the arithmetic, so the verdict always follows from the numbers:
-
-```sh
-node skills/asset-qa-scorecard/scripts/score.mjs brands/test_project/qa_scorecard.json
-```
-
-```text
-Legibility and accessibility  ██████····     6/10  below floor
-Crops and formats             ██████····     3/5  below floor
-
-REVISE  84/100 (threshold 85)
-```
-
-Any hard failure rejects the asset; a total under the threshold, or any dimension under 70% of its weight, means revise.
-
 ## Examples
 
-[`brands/test_project/`](brands/test_project/) holds an output from every skill for two fictional products: Aurel, a devotional app taken from brief to QA, and Numo, a lecture-quiz tool used for naming and claims. Its [index](brands/test_project/README.md) shows which file is which. Names are illustrative and have not been cleared.
+[`brands/test_project/`](brands/test_project/) has an output from every skill for two fictional products. Aurel, a devotional app, goes through the chain from brief to QA. Numo, a lecture-quiz tool, is used for naming and claims. The [index](brands/test_project/README.md) lists each file. Open [`name_preview.html`](brands/test_project/name_preview.html) in a browser to see the name preview. Names are illustrative and have not been cleared.
 
-## Validate
-
-With Node.js 18 or later, and no dependencies:
+## Check outputs
 
 ```sh
-node scripts/validate-examples.mjs
+node scripts/validate-examples.mjs                         # every skill and example
+node scripts/validate-examples.mjs my-brand/*.json         # your own outputs
 ```
 
-This checks every skill's frontmatter and every example against its skill's `schema.json`, plus rules a schema cannot express: naming totals add up and rank correctly, observations cite real references, proposed text colours pass WCAG AA on the ground colour. Pass a path to check one of your own outputs:
+The validator checks each file against the schema its filename points to. It also checks rules a schema can't express: totals add up and rank correctly, observations cite real references, colour pairs pass their contrast minimums, verdicts match scores, and voice examples follow their own rules. CI runs it, and every script, on each pull request.
 
-```sh
-node scripts/validate-examples.mjs path/to/naming_candidates.json
-```
+## Docs
 
-The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`, `claims_register.json`, `qa_scorecard.json`, `brief.json`, `tokens.json`, `voice.json`).
-
-## How the skills think
-
-[docs/principles.md](docs/principles.md) collects the lessons behind them: observe before interpreting, split contradictory references, inherit rather than fork, a two-element lockup budget, ask whether something needs a name, and keep every claim tied to what has actually shipped.
+- [Getting started](docs/getting-started.md): install for each tool, first run, filenames, scripts, troubleshooting
+- [Workflow](docs/workflow.md): a full project, step by step, and shorter paths
+- [Principles](docs/principles.md): the lessons from real brand projects behind the skills
+- [Changelog](CHANGELOG.md)
 
 ## Boundaries
 
-- Scores are judgement, not clearance. Nothing here checks trademarks, company names, handles or domains.
-- The skills produce direction and concepts, not finished artwork.
-- What you share with an assistant is subject to that provider's data handling.
+- Scores and flags are judgement, not clearance. Nothing here checks trademarks, company names, handles or domains.
+- The skills produce direction, systems and concepts, not finished artwork.
+- What you share with an assistant is subject to that provider's data handling. The scripts run locally and make no network calls.
 - No license file is included yet. Do not assume an open-source license because the repository is public.
-
-Changes are listed in [CHANGELOG.md](CHANGELOG.md).

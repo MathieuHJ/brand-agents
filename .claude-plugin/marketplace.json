@@ -11,7 +11,7 @@
     {
       "name": "brand-agents",
       "source": "./",
-      "description": "Brand skills from brief to shipped asset: brief intake, art direction, naming, identity directions, claims register and asset QA, with structured JSON outputs."
+      "description": "Nine brand skills from brief to shipped asset: brief, art direction, tokens, naming, name preview, identity directions, voice, claims register and asset QA, with JSON outputs and small checking scripts."
     }
   ]
 }
