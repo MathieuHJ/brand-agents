@@ -1,0 +1,63 @@
+{
+  "product": "Numo (illustrative lecture-to-quiz tool)",
+  "as_of": "2026-10-09",
+  "owner": "Product marketing",
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Turns a lecture recording or slide deck into a draft quiz you can edit.",
+      "status": "shipped",
+      "source": "Release notes 1.4",
+      "match": ["quiz"],
+      "approved_phrasings": ["Turn a lecture into a draft quiz", "Edit every question before class"],
+      "overreach_phrasings": ["no editing needed", "perfect quiz"]
+    },
+    {
+      "id": "C2",
+      "statement": "Runs live polls that students answer from a browser with a six-digit code.",
+      "status": "shipped",
+      "source": "Release notes 1.2",
+      "match": ["poll", "six-digit code"],
+      "approved_phrasings": ["Students join from any browser with a code"]
+    },
+    {
+      "id": "C3",
+      "statement": "Exports results to Canvas and Moodle gradebooks.",
+      "status": "beta",
+      "source": "Early access programme, October cohort",
+      "match": ["Canvas", "Moodle", "gradebook", "LMS"],
+      "approved_phrasings": ["Gradebook export to Canvas and Moodle (in beta)"]
+    },
+    {
+      "id": "C4",
+      "statement": "Polls keep working without a connection and sync when back online.",
+      "status": "planned",
+      "source": "Roadmap review, Q1",
+      "match": ["offline", "without a connection"],
+      "surfaces": ["roadmap page"]
+    },
+    {
+      "id": "C5",
+      "statement": "Grades open-ended answers automatically.",
+      "status": "proposed",
+      "source": "Discovery notes, not decided",
+      "match": ["grades open", "open-ended answers", "auto-grad", "grading"]
+    },
+    {
+      "id": "C6",
+      "statement": "Integration with a legacy slide tool.",
+      "status": "retired",
+      "source": "Removed in release 1.3",
+      "match": ["SlideBox"]
+    }
+  ],
+  "banned": [
+    { "phrase": "boosts grades", "reason": "No outcome study supports a grade claim.", "rewrite": "Helps you see who is following along, while you teach." },
+    { "phrase": "guaranteed", "reason": "We cannot guarantee engagement or results.", "rewrite": "Designed to get more of the room answering." },
+    { "phrase": "unlike Kahoot", "reason": "No competitor comparisons in launch copy.", "rewrite": "Describe what Numo does, not what others don't." }
+  ],
+  "unknowns": [
+    { "question": "Do we have permission to name schools from the pilot?", "owner": "Partnerships lead" },
+    { "question": "Is the free tier capped by students or by sessions?", "owner": "Product lead" }
+  ]
+}
