@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Logo and identity directions",
+  "type": "object",
+  "required": ["brand_name", "core_tension", "parent_relationship", "directions", "explore_first"],
+  "additionalProperties": false,
+  "properties": {
+    "brand_name": { "type": "string", "minLength": 1 },
+    "core_tension": { "type": "string" },
+    "parent_relationship": { "type": "string", "enum": ["none", "sibling", "endorsed", "independent"] },
+    "directions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "direction_name", "strategic_intent", "logo_concept", "typography_approach", "color_logic",
+          "lockups", "small_size_behavior", "motion_behavior", "personality_keywords", "pros", "risks",
+          "cliche_to_avoid", "best_use_cases", "scorecard"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "direction_name": { "type": "string" },
+          "strategic_intent": { "type": "string" },
+          "logo_concept": {
+            "type": "object",
+            "required": ["mark_type", "geometry", "notes"],
+            "additionalProperties": false,
+            "properties": {
+              "mark_type": { "type": "string", "enum": ["wordmark", "lettermark", "symbol", "combination", "emblem", "system"] },
+              "geometry": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          },
+          "typography_approach": { "type": "string" },
+          "color_logic": { "type": "string" },
+          "lockups": { "type": "string" },
+          "small_size_behavior": { "type": "string" },
+          "motion_behavior": { "type": "string" },
+          "personality_keywords": { "type": "array", "items": { "type": "string" } },
+          "pros": { "type": "array", "items": { "type": "string" } },
+          "risks": { "type": "array", "items": { "type": "string" } },
+          "cliche_to_avoid": { "type": "string" },
+          "best_use_cases": { "type": "array", "items": { "type": "string" } },
+          "scorecard": {
+            "type": "object",
+            "required": ["distinctiveness", "strategic_fit", "scalability", "legibility", "production_effort"],
+            "additionalProperties": false,
+            "properties": {
+              "distinctiveness": { "type": "integer", "minimum": 1, "maximum": 5 },
+              "strategic_fit": { "type": "integer", "minimum": 1, "maximum": 5 },
+              "scalability": { "type": "integer", "minimum": 1, "maximum": 5 },
+              "legibility": { "type": "integer", "minimum": 1, "maximum": 5 },
+              "production_effort": { "type": "integer", "minimum": 1, "maximum": 5 }
+            }
+          }
+        }
+      }
+    },
+    "explore_first": {
+      "type": "object",
+      "required": ["direction_name", "reason"],
+      "additionalProperties": false,
+      "properties": { "direction_name": { "type": "string" }, "reason": { "type": "string" } }
+    },
+    "open_questions": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "brand-agents",
+  "owner": {
+    "name": "MathieuHJ",
+    "url": "https://github.com/MathieuHJ"
+  },
+  "metadata": {
+    "description": "Brand skills by MathieuHJ: art direction, naming and logo identity exploration."
+  },
+  "plugins": [
+    {
+      "name": "brand-agents",
+      "source": "./",
+      "description": "Brand skills for art direction, naming and logo identity exploration, with structured JSON outputs."
+    }
+  ]
+}

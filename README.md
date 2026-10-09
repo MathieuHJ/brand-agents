@@ -1,47 +1,73 @@
 # Brand Agents
 
-Reusable AI instructions for turning visual references and early product ideas into structured brand decisions.
+Agent skills for the early, fuzzy part of brand work: turning references into art direction, finding a name, and exploring identity directions. Each skill returns a readable summary plus JSON that matches a published schema, so outputs can be checked, compared and passed to the next step.
 
-This repository contains Markdown skills and example JSON outputs. It is not a running application or a hosted service, and there is no package to install.
+The skills are plain Markdown in the [Agent Skills](https://agentskills.io) format. They work in Claude Code, Codex and any assistant you can paste instructions into. There is no service to run.
 
-## What is included
+## Skills
 
 | Skill | Bring | Get back |
 | --- | --- | --- |
-| [Art direction extractor](skills/art_direction_extractor/SKILL.md) | Mood-board images, with optional audience, brand adjectives, competitors, and things to avoid | A short narrative and structured rules for typography, colour, imagery, and layout |
-| [Brand naming rubric](skills/brand_naming_rubric/SKILL.md) | An idea, industry, tone, language, and naming constraints | Ranked names, scoring rationale, risks, and checks to carry out next |
+| [Art direction extractor](skills/art-direction-extractor/SKILL.md) | Mood-board images; optionally audience, adjectives, competitors, things to avoid | Evidence-backed rules for colour, type, imagery, layout and motion, an accessibility pass, and hand-offs for logo, UI and content |
+| [Brand naming rubric](skills/brand-naming-rubric/SKILL.md) | The idea, audience, tone, markets and constraints | A check on whether it needs a name at all, ranked names with pronunciation and linguistic notes, a kill screen, and a clearance to-do list |
+| [Logo and identity directions](skills/logo-identity-directions/SKILL.md) | A chosen name, ideally with an art direction JSON | 3–5 distinct directions with lockup, 16px and motion behaviour, clichés to avoid, and a comparable scorecard |
 
-## Try a skill
+They chain: **references → art direction → name → identity directions**. Each can also run alone.
 
-1. Open the relevant `SKILL.md` and provide its instructions to your AI assistant. Use an image-capable assistant for mood boards.
-2. Supply the inputs listed in that file. Use only references you have permission to share with your chosen provider.
-3. Ask for both the readable summary and the JSON output defined by the skill.
-4. Review the result against the original brief. Treat scores and style judgments as a starting point, not an objective verdict.
+## Install
 
-Example naming brief:
+**Claude Code** (as a plugin):
 
-> Follow the brand naming rubric. The idea is a tool that turns lectures into interactive polls and quizzes. The audience is educators. Aim for clear, warm, memorable names suitable for an English-speaking audience. Avoid names that sound like an existing competitor. State assumptions and do not claim domain availability.
+```sh
+/plugin marketplace add MathieuHJ/brand-agents
+/plugin install brand-agents@brand-agents
+```
 
-For art direction, attach your mood-board images and add:
+**Inside this repo:** `.claude/skills` and `.codex/skills` are links to `skills/`, so Claude Code (and Codex, where it reads repo-level skills from `.codex/skills`) picks them up without copying. On Windows, Git may check these links out as plain files; copy the folders instead.
 
-> Follow the art direction extractor. Identify the recurring visual choices in these references, then turn them into practical rules. Separate observations from assumptions and include accessibility watchouts.
+**Anywhere else:** copy a skill folder into your tool's skills directory, or paste its `SKILL.md` into the conversation. Use an image-capable model for mood boards.
 
-## Example outputs
+## Use
 
-- [Art direction JSON](brands/test_project/art_direction.json)
-- [Naming candidates JSON](brands/test_project/naming_candidates.json)
+Ask naturally; the skill descriptions tell the agent when to load them.
 
-These are two separate illustrative briefs, not one complete brand identity. The names are examples, not cleared recommendations.
+> Name a tool that turns lectures into live polls and quizzes. It's for educators, English first, and it should feel clear and warm. Avoid anything that sounds like Kahoot or Mentimeter.
 
-With Node.js installed, validate that both examples are parseable:
+> Here are eight references for a meditation journal. Pull out the art direction, and tell me if they disagree with each other.
+
+> We picked "Aurel". Using this art direction JSON, give me identity directions. It's an app first.
+
+Only share references and briefs you are allowed to send to your assistant's provider.
+
+## Examples
+
+[`brands/test_project/`](brands/test_project/) holds one output per skill: [art direction](brands/test_project/art_direction.json), [naming](brands/test_project/naming_candidates.json) and [identity directions](brands/test_project/logo_directions.json). The naming example is a separate brief from the other two. Names are illustrative and have not been cleared.
+
+## Validate
+
+With Node.js 18 or later, and no dependencies:
 
 ```sh
 node scripts/validate-examples.mjs
 ```
 
+This checks every skill's frontmatter and every example against its skill's `schema.json`, plus rules a schema cannot express: naming totals add up and rank correctly, observations cite real references, proposed text colours pass WCAG AA on the ground colour. Pass a path to check one of your own outputs:
+
+```sh
+node scripts/validate-examples.mjs path/to/naming_candidates.json
+```
+
+The filename decides which schema applies (`art_direction.json`, `naming_candidates.json`, `logo_directions.json`).
+
+## How the skills think
+
+[docs/principles.md](docs/principles.md) collects the lessons behind them: observe before interpreting, split contradictory references, inherit rather than fork, a two-element lockup budget, ask whether something needs a name, and keep every claim tied to what has actually shipped.
+
 ## Boundaries
 
-- Naming scores do not establish trademark, company-name, or domain availability. Perform independent checks before adopting a name.
-- The repository does not generate finished logo artwork or run searches automatically.
-- Sharing a brief or image with an assistant is subject to that provider's data handling. These text files do not provide a private execution environment.
-- No license file is currently included. Do not assume an open-source license from the repository being public.
+- Scores are judgement, not clearance. Nothing here checks trademarks, company names, handles or domains.
+- The skills produce direction and concepts, not finished artwork.
+- What you share with an assistant is subject to that provider's data handling.
+- No license file is included yet. Do not assume an open-source license because the repository is public.
+
+Changes are listed in [CHANGELOG.md](CHANGELOG.md).

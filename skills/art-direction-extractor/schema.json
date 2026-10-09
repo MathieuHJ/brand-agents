@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Art direction",
+  "type": "object",
+  "required": [
+    "summary",
+    "observations",
+    "style_keywords",
+    "style_axes",
+    "color_mood",
+    "typography_mood",
+    "imagery_rules",
+    "layout_rules",
+    "cliche_watch",
+    "accessibility_watchouts",
+    "handoffs",
+    "references_summary",
+    "assumptions",
+    "risks_or_watchouts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "summary": { "type": "string", "minLength": 1 },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^R[0-9]+$" },
+          "description": { "type": "string" },
+          "key_choice": { "type": "string" }
+        }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["pattern", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "pattern": { "type": "string" },
+          "evidence": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+        }
+      }
+    },
+    "clusters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "references", "best_for", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "references": { "type": "array", "items": { "type": "string" } },
+          "best_for": { "type": "string" },
+          "role": { "type": "string", "enum": ["primary", "secondary", "campaign-only", "rejected"] }
+        }
+      }
+    },
+    "style_keywords": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+    "style_axes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["axis", "position", "target"],
+        "additionalProperties": false,
+        "properties": {
+          "axis": { "type": "string", "pattern": "↔" },
+          "position": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "target": { "type": "string" }
+        }
+      }
+    },
+    "color_mood": {
+      "type": "object",
+      "required": ["description", "avoid"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "palette_candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["hex", "role", "source"],
+            "additionalProperties": false,
+            "properties": {
+              "hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+              "role": { "type": "string" },
+              "source": { "type": "string", "enum": ["sampled", "proposed"] }
+            }
+          }
+        },
+        "avoid": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "typography_mood": { "type": "object", "required": ["description", "dos", "donts"], "additionalProperties": false, "properties": { "description": { "type": "string" }, "dos": { "type": "array", "items": { "type": "string" } }, "donts": { "type": "array", "items": { "type": "string" } } } },
+    "imagery_rules": { "type": "object", "required": ["photography_or_illustration", "dos", "donts"], "additionalProperties": false, "properties": { "photography_or_illustration": { "type": "string" }, "dos": { "type": "array", "items": { "type": "string" } }, "donts": { "type": "array", "items": { "type": "string" } } } },
+    "layout_rules": { "type": "object", "required": ["dos", "donts"], "additionalProperties": false, "properties": { "dos": { "type": "array", "items": { "type": "string" } }, "donts": { "type": "array", "items": { "type": "string" } } } },
+    "motion_rules": { "type": "object", "required": ["description", "dos", "donts"], "additionalProperties": false, "properties": { "description": { "type": "string" }, "dos": { "type": "array", "items": { "type": "string" } }, "donts": { "type": "array", "items": { "type": "string" } } } },
+    "cliche_watch": {
+      "type": "object",
+      "required": ["risk", "guardrail"],
+      "additionalProperties": false,
+      "properties": { "risk": { "type": "string" }, "guardrail": { "type": "string" } }
+    },
+    "accessibility_watchouts": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "handoffs": {
+      "type": "object",
+      "required": ["logo", "ui", "content"],
+      "additionalProperties": false,
+      "properties": {
+        "logo": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "ui": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "content": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "references_summary": { "type": "array", "items": { "type": "string" } },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "risks_or_watchouts": { "type": "array", "items": { "type": "string" } }
+  }
+}
