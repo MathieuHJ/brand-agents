@@ -1,0 +1,26 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Skills and examples
+        run: node scripts/validate-examples.mjs
+      - name: Claims checker passes the revised copy
+        run: node skills/claims-register/scripts/check-copy.mjs brands/test_project/claims_register.json brands/test_project/launch_copy_revised.md
+      - name: Claims checker blocks the failing copy
+        run: |
+          if node skills/claims-register/scripts/check-copy.mjs brands/test_project/claims_register.json brands/test_project/launch_copy.md; then
+            echo "Expected P0 findings in launch_copy.md" && exit 1
+          fi
+      - name: Scorecard script runs
+        run: node skills/asset-qa-scorecard/scripts/score.mjs brands/test_project/qa_scorecard.json
