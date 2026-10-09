@@ -60,7 +60,8 @@
     { "question": "Which launch markets, and is any translation planned for year one?", "owner": "Founder", "blocks": ["brand-naming-rubric"] },
     { "question": "Should the identity signal a specific tradition or stay broadly spiritual?", "owner": "Founder", "blocks": ["logo-identity-directions"] },
     { "question": "What makes this different from scripture apps beyond tone? The differentiator is still blank.", "owner": "Founder and product lead" },
-    { "question": "Has 'Aurel' been through a trademark search in the app and software classes?", "owner": "Founder", "blocks": ["logo-identity-directions"] }
+    { "question": "Has 'Aurel' been through a trademark search in the app and software classes?", "owner": "Founder", "blocks": ["logo-identity-directions"] },
+    { "question": "What budget is there for launch design and assets?", "owner": "Founder" }
   ],
   "next_skills": [
     { "skill": "art-direction-extractor", "ready": true, "missing": [] },
