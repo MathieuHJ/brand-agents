@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Name in context: compare actual 16 CSS px canvas monograms on light and dark backgrounds, with enlarged pixels and 100%/125% raster density. Samples redraw with font and case changes. Includes a manual Windows 125% checklist; the density preview does not emulate Windows text rendering. Shared-initial flags are now advisory, and narrow layouts remain usable.
+- Added generator regression tests and an optional Chromium/Playwright browser suite.
+
 ## 0.4.0 — 2026-10-09
 
 ### Added

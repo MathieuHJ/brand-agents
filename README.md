@@ -40,7 +40,7 @@ The brief ends by telling you which skill to run next. For Codex, Claude.ai or o
 | Script | What it does |
 |---|---|
 | `skills/direction-to-tokens/scripts/tokens.mjs` | Contrast report for every text and background pair; `--css` exports CSS variables |
-| `skills/name-in-context/scripts/preview.mjs` | Builds the offline name preview page |
+| `skills/name-in-context/scripts/preview.mjs` | Builds the offline name preview page, with monochrome light/dark 16px rasters and a labelled 125% density approximation |
 | `skills/voice-and-tone/scripts/lint-voice.mjs` | Flags copy that breaks the voice guide |
 | `skills/claims-register/scripts/check-copy.mjs` | Flags claims the product can't back yet |
 | `skills/asset-qa-scorecard/scripts/score.mjs` | Computes the QA total, floors and verdict |
@@ -75,8 +75,11 @@ P1  line 7 C3  Results sync straight to Canvas and Moodle.
 
 ```sh
 node scripts/validate-examples.mjs                         # every skill and example
+node --test tests/name-preview.test.mjs                    # preview regression tests
 node scripts/validate-examples.mjs my-brand/*.json         # your own outputs
 ```
+
+For rendered-pixel checks, `tests/name-preview.browser.cjs` uses an optional Playwright installation and Chromium (no runtime dependency). Run `CHROMIUM_PATH=/path/to/chromium node tests/name-preview.browser.cjs` where Playwright is resolvable. It loads the generated HTML in memory and checks font/case/theme/density changes, keyboard controls, narrow layouts and external requests. These checks do not validate Windows rasterization.
 
 The validator checks each file against the schema its filename points to. It also checks rules a schema can't express: totals add up and rank correctly, observations cite real references, colour pairs pass their contrast minimums, verdicts match scores, and voice examples follow their own rules. CI runs it, and every script, on each pull request.
 

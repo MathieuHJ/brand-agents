@@ -23,7 +23,20 @@
   .strip { display: flex; flex-wrap: wrap; gap: 22px; }
   .strip figure { margin: 0; display: grid; justify-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
   .icon { display: grid; place-items: center; background: var(--ink); color: var(--bg); font-family: var(--wm); font-weight: 600; }
-  .clash .icon { outline: 1px dashed var(--ink); outline-offset: 3px; }
+  .samples { display: flex; gap: 12px; }
+  .sample { display: grid; gap: 8px; justify-items: center; padding: 12px; border: 1px solid #777; border-radius: 8px; }
+  .sample.light { background: #fff; color: #000; }
+  .sample.dark { background: #000; color: #fff; }
+  .sample canvas { display: block; }
+  .sample .pixels { width: 80px; height: 80px; image-rendering: pixelated; }
+  .raster-note { max-width: 85ch; font-size: 12px; color: var(--muted); }
+  .contexts > *, .top > * { min-width: 0; }
+  .browser, .lines, figcaption { overflow-wrap: anywhere; }
+  @media (max-width: 600px) {
+    header, section, footer { padding-left: 16px; padding-right: 16px; }
+    .controls > label:first-child { width: 100%; }
+    .contexts { grid-template-columns: 1fr; }
+  }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(560px, 100%), 1fr)); gap: 20px; }
   .card { border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 18px; }
   .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
@@ -59,12 +72,21 @@
         <option value="ui-monospace, Menlo, monospace">Mono</option>
       </select>
     </label>
-    <button id="case" type="button">lowercase</button>
+    <label>16px sample density
+      <select id="density">
+        <option value="1">100% · 16 × 16 raster</option>
+        <option value="1.25">125% · 20 × 20 raster</option>
+      </select>
+    </label>
+    <button id="case" aria-pressed="false" type="button">lowercase</button>
     <button id="theme" type="button">Dark</button>
   </div>
 </header>
 <section>
-  <p class="kicker">At 16px, side by side</p>
+  <p class="kicker">At 16 CSS px, side by side</p>
+  <p class="raster-note" id="raster-note" aria-live="polite"></p>
+  <p class="raster-note">Monochrome light and dark samples: actual browser canvas rasters, plus enlarged pixels (80px). 125% allocates 20 × 20 pixels for a 16 CSS px icon. This approximates density, not Windows ClearType or OS scaling. Your display may resample the small view. Shared initials are a prompt to compare, not a pixel-match verdict.</p>
+  <details class="raster-note"><summary>Check on Windows at 125%</summary><p>On Windows, set Settings → System → Display → Scale to 125%, open this file in your target browser at 100% zoom, and choose the 125% sample. Compare both backgrounds, every font and case, and the browser-rendered icons below. Check at normal viewing distance; record Windows/browser version and installed font. The canvas samples do not reproduce native app or ClearType rendering: verify the final exported icon in its target app too.</p></details>
   <div class="strip" id="strip"></div>
 </section>
 <section>
@@ -80,7 +102,7 @@ function analyze(list) {
     const flags = [];
     const first = c.name[0].toLowerCase();
     const twins = clean.filter((o) => o.name !== c.name && o.name[0].toLowerCase() === first).map((o) => o.name);
-    if (twins.length) flags.push(`Same first letter as ${twins.join(', ')}: identical monogram at 16px.`);
+    if (twins.length) flags.push(`Same first letter as ${twins.join(', ')}: shared initial; compare the rendered samples, not just the letters.`);
     const letters = c.name.replace(/[^\p{L}]/gu, '').length;
     if (letters > 10) flags.push(`${letters} letters: long for an app icon label and a wordmark at small sizes.`);
     if (/[sxz]$/i.test(c.name)) flags.push(`Ends in "${c.name.slice(-1)}": the possessive "${c.name}'s" is awkward to say and write.`);
@@ -95,11 +117,45 @@ const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls)
 let lower = false;
 const known = new Map(DATA.list.map((c) => [c.name, c]));
 function icon(name, size) {
-  const n = el('div', 'icon', name[0].toUpperCase());
+  const n = el('div', 'icon', monogram(name));
   n.style.width = n.style.height = size + 'px';
   n.style.borderRadius = Math.round(size * 0.23) + 'px';
   n.style.fontSize = Math.round(size * 0.55) + 'px';
   return n;
+}
+function monogram(name) {
+  const first = Array.from(name)[0] ?? '';
+  return lower ? first.toLowerCase() : first.toUpperCase();
+}
+function rasterSample(name, dark, density) {
+  const group = el('div', 'sample ' + (dark ? 'dark' : 'light'));
+  const canvas = el('canvas');
+  canvas.width = canvas.height = Math.round(16 * density);
+  canvas.style.width = canvas.style.height = '16px';
+  canvas.setAttribute('role', 'img');
+  canvas.setAttribute('aria-label', name + ': ' + monogram(name) + ', ' + (dark ? 'dark' : 'light') + ', ' + canvas.width + ' pixel raster');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return el('span', '', 'Canvas unavailable: inspect the browser icons below.');
+  ctx.scale(density, density);
+  ctx.fillStyle = dark ? '#000' : '#fff';
+  ctx.fillRect(0, 0, 16, 16);
+  ctx.fillStyle = dark ? '#fff' : '#000';
+  ctx.beginPath();
+  ctx.moveTo(4, 0); ctx.lineTo(12, 0); ctx.quadraticCurveTo(16, 0, 16, 4);
+  ctx.lineTo(16, 12); ctx.quadraticCurveTo(16, 16, 12, 16);
+  ctx.lineTo(4, 16); ctx.quadraticCurveTo(0, 16, 0, 12);
+  ctx.lineTo(0, 4); ctx.quadraticCurveTo(0, 0, 4, 0); ctx.fill();
+  ctx.fillStyle = dark ? '#000' : '#fff';
+  ctx.font = '600 9px ' + $('font').value;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(monogram(name), 8, 8);
+  const zoom = el('canvas', 'pixels');
+  zoom.width = zoom.height = canvas.width;
+  zoom.getContext('2d').drawImage(canvas, 0, 0);
+  zoom.setAttribute('aria-hidden', 'true');
+  group.append(el('span', '', dark ? 'Dark' : 'Light'), canvas, zoom);
+  return group;
 }
 function speak(text) {
   if (!('speechSynthesis' in window)) return;
@@ -114,9 +170,13 @@ function render() {
   const show = (n) => (lower ? n.toLowerCase() : n);
   $('meta').textContent = rows.length + (rows.length === 1 ? ' name' : ' names') + ' · from ' + DATA.source + (DATA.idea ? ' · ' + DATA.idea : '');
   const strip = $('strip'); strip.replaceChildren();
+  const density = Number($('density').value);
+  $('raster-note').textContent = '16 CSS px · ' + Math.round(16 * density) + ' × ' + Math.round(16 * density) + ' raster pixels · ' + (density * 100) + '% density · current browser/system fonts';
   for (const r of rows) {
-    const f = el('figure', r.flags.some((x) => x.startsWith('Same first letter')) ? 'clash' : '');
-    f.append(icon(r.name, 16), el('figcaption', '', r.name));
+    const f = el('figure');
+    const samples = el('div', 'samples');
+    samples.append(rasterSample(r.name, false, density), rasterSample(r.name, true, density));
+    f.append(samples, el('figcaption', '', r.name));
     strip.append(f);
   }
   const cards = $('cards'); cards.replaceChildren();
@@ -162,8 +222,9 @@ function render() {
 }
 $('names').value = DATA.list.map((c) => c.name).join('\n');
 $('names').addEventListener('input', render);
-$('font').addEventListener('change', (e) => document.documentElement.style.setProperty('--wm', e.target.value));
-$('case').addEventListener('click', (e) => { lower = !lower; e.target.textContent = lower ? 'As written' : 'lowercase'; render(); });
+$('font').addEventListener('change', (e) => { document.documentElement.style.setProperty('--wm', e.target.value); render(); });
+$('density').addEventListener('change', render);
+$('case').addEventListener('click', (e) => { lower = !lower; e.target.setAttribute('aria-pressed', String(lower)); e.target.textContent = lower ? 'As written' : 'lowercase'; render(); });
 $('theme').addEventListener('click', (e) => {
   const dark = document.documentElement.dataset.theme !== 'dark';
   document.documentElement.dataset.theme = dark ? 'dark' : 'light';
